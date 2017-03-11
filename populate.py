@@ -1,8 +1,3 @@
-
-# coding: utf-8
-
-# In[147]:
-
 #!/usr/bin/python
 
 # Student Portfolio Folder Populator
@@ -34,21 +29,6 @@
 # Written by Aaron Ciuffo (aaron.ciuffo @ gmail.com)
 # March 10, 2017
 # Released under GPL V3
-
-
-# In[152]:
-
-print sys.argv
-
-
-# In[150]:
-
-sys.argv.pop()
-
-
-# In[151]:
-
-sys.argv.append('./stuexp.txt')
 
 
 # In[87]:
@@ -173,10 +153,10 @@ def main():
     folders = fileRead(fileList)
     
     
-
+    # change this to sys.argv[1] for running on command line
     try:
-        print 'input file:', sys.argv[3]
-        studentInfo = sys.argv[3]
+        print 'input file:', sys.argv[1]
+        studentInfo = sys.argv[1]
     except IndexError as e: 
         print '\nError: please drop a valid CSV list of students onto this application'
         print 'CSV Format:'
@@ -201,7 +181,7 @@ def main():
         print 'exiting'
         return(False)
     
-    # read the csv file
+    # read the csv file in Universal newline mode (rU)
     try:
         with open(studentInfo, 'rU') as csvfile:
             csvreader = csv.reader(csvfile)
