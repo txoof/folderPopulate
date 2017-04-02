@@ -28,5 +28,5 @@ exe = EXE(pyz,
           console=False )
 app = BUNDLE(exe,
              name='portfolioCreator.app',
-             icon=None,
+             icon="./folderPopulate.ico",
              bundle_identifier=None)

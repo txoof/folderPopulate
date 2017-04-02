@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[ ]:
+# In[4]:
 
 import sys
 import re
@@ -30,12 +30,13 @@ from urlparse import urlsplit
 # SCOPES = 'https://www.googleapis.com/auth/drive.metadata.readonly'
 # CLIENT_SECRET_FILE = 'client_secret_qs.json'
 # APPLICATION_NAME = 'Drive API Python Quickstart'
-APP_SHORT_NAME = 'folderPopulate'
+APP_SHORT_NAME = 'gDrivePopulate'
 
 
 # # TODO:
 # ## getCredentials
 # * look into why on initial credential fetching script halts after deny/allow screen
+# * needs to accept client_secrets; currently not using the proper path
 # 
 # ## imports:
 # * check full imports and slim down?
@@ -106,11 +107,25 @@ def pathify(parts = [], basepath = ''):
     return(path)
 
 
+# In[3]:
+
+def getWorkingPath():
+    if getattr(sys, 'frozen', False):
+        bundle_dir = sys._MEIPASS
+    else:
+        bundle_dir = os.path.dirname(os.path.abspath("__file__"))
+    
+    return(bundle_dir)
+
+
 # In[ ]:
 
-def getCredentials(config_path = os.path.expanduser('~/.config/'+APP_SHORT_NAME)):
+def getCredentials(config_path = os.path.expanduser('~/.config/'+APP_SHORT_NAME), 
+                   client_secret = './client_secret+'+APP_SHORT_NAME+'.json'):
     scopes = 'https://www.googleapis.com/auth/drive' # this is a bit expansive, consider a slimmer set
-    client_secret = './client_secret_'+APP_SHORT_NAME+'.json'
+    
+    # update this - this is not valid; need to pass in client_secret from the main module
+    #client_secret = './client_secret_'+APP_SHORT_NAME+'.json'
     home_dir = os.path.expanduser('~')
     credential_dir = os.path.join(config_path, 'credentials')
     credential_file = os.path.join(credential_dir, APP_SHORT_NAME+'_credentials.json')
@@ -428,7 +443,7 @@ class gDrive():
 
 # alternatively pass in the configuration object?
 def gDrivePopulate(gdBaseFolderURL = '', gradeFoldersFile = './gradefolders.txt', 
-                   studentInfo = '', client_secret = '', outputPath = os.path.expanduser('~/')):
+                   studentInfo = '', client_secret = './client_secret_'+APP_SHORT_NAME+'.json', outputPath = os.path.expanduser('~/')):
     
     gdBaseFolderId = urlsplit(gdBaseFolderURL).path.split('/')[-1]
     
@@ -468,7 +483,7 @@ def gDrivePopulate(gdBaseFolderURL = '', gradeFoldersFile = './gradefolders.txt'
         
     logging.info('checking google credentials')
     try:
-        credentials = getCredentials()
+        credentials = getCredentials(client_secret = client_secret)
     except SystemExit:
         logging.critical('You have chosen to deny access to google drive.')
         logging.critical('This program cannot continue without access to google drive.')
