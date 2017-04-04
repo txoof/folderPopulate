@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[12]:
+# In[1]:
 
 from Tkinter import *
 import tkFileDialog
@@ -13,9 +13,10 @@ import re
 from datetime import datetime
 from gDrivePopulate import *
 oldstdout = sys.stdout
+APP_SHORT_NAME = 'portfolioCreator'
 
 
-# In[13]:
+# In[ ]:
 
 # This looks great!
 # http://stackoverflow.com/questions/36604900/redirect-stdout-to-tkinter-text-widget
@@ -27,7 +28,7 @@ oldstdout = sys.stdout
 # http://stackoverflow.com/questions/14883648/redirect-output-from-python-logger-to-tkinter-widget
 
 
-# In[14]:
+# In[2]:
 
 # http://stackoverflow.com/questions/36604900/redirect-stdout-to-tkinter-text-widget
 class IORedirector(object):
@@ -49,7 +50,7 @@ class StdoutRedirector(IORedirector):
         pass
 
 
-# In[15]:
+# In[3]:
 
 def getWorkingPath():
     if getattr(sys, 'frozen', False):
@@ -60,7 +61,7 @@ def getWorkingPath():
     return(bundle_dir)
 
 
-# In[18]:
+# In[37]:
 
 class myApp(object):
     def __init__(self, master):
@@ -69,7 +70,7 @@ class myApp(object):
 
         # get the configuration
         # Path to configuration files
-        self.configPath = os.path.expanduser('~/.config/populate/')
+        self.configPath = os.path.expanduser('~/.config/'+APP_SHORT_NAME)
         self.configFile = os.path.join(self.configPath, 'config.ini')
         
         # student CSV to import
@@ -352,7 +353,7 @@ class myApp(object):
         self.labelURL_text.set(self.message)
         
         self.parser.set(self.mainSection, 'gdBaseFolder', self.portfolioURL)
-        self.parser.set(self.mainSection, 'outputFolder', self.outputFolder)        
+        self.parser.set(self.mainSection, 'outputFolder', self.outputFolder)   
         
         # write configuration file
         logging.debug('writing configuration to file: {}'.format(self.configFile))
@@ -373,7 +374,6 @@ class myApp(object):
                                       #gradeFoldersFile = './gradefolders.txt',
                                       gradeFoldersFile = self.gradeFolderFile,
                                       client_secret = self.clientSecret,
-                                      #client_secret = './client_secret_folderPopulate.json',
                                       studentInfo = self.studentFile.name,
                                       outputPath = self.outputFolder)
             

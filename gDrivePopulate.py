@@ -30,7 +30,7 @@ from urlparse import urlsplit
 # SCOPES = 'https://www.googleapis.com/auth/drive.metadata.readonly'
 # CLIENT_SECRET_FILE = 'client_secret_qs.json'
 # APPLICATION_NAME = 'Drive API Python Quickstart'
-APP_SHORT_NAME = 'gDrivePopulate'
+APP_SHORT_NAME = 'portfolioCreator'
 
 
 # # TODO:
