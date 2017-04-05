@@ -61,7 +61,7 @@ def getWorkingPath():
     return(bundle_dir)
 
 
-# In[37]:
+# In[6]:
 
 class myApp(object):
     def __init__(self, master):
@@ -142,10 +142,10 @@ class myApp(object):
         self.rootLogger.addHandler(consoleHandler) 
 
         # Setlogging level
-        #self.rootLogger.setLevel(getattr(logging, self.loglevel))
-        self.rootLogger.setLevel(logging.DEBUG)
-    #     rootLogger.setLevel(logging.WARNING)
-    #     rootLogger.setLevel(logging.INFO)
+        self.rootLogger.setLevel(getattr(logging, self.loglevel))
+        #self.rootLogger.setLevel(logging.DEBUG)
+        #rootLogger.setLevel(logging.WARNING)
+        #rootLogger.setLevel(logging.INFO)
 
     def guiInit(self):
         # initiate the output window 
@@ -342,17 +342,18 @@ class myApp(object):
         r'(?:/?|[/?]\S+)$', re.IGNORECASE)
         
         # spawn a text window for output
+        logging.debug('checking validity of entered URL')
         if re.match(urlRegex, self.entryURL.get()): 
-            self.portfolioURL = self.entryURL.get()
+            self.gdBaseFolder = self.entryURL.get()
             
             self.message = self.msgOKURL
         else: 
-            self.portfolioURL = ''
+            self.gdBaseFolder = ''
             self.message = self.msgBadURL        
         
         self.labelURL_text.set(self.message)
         
-        self.parser.set(self.mainSection, 'gdBaseFolder', self.portfolioURL)
+        self.parser.set(self.mainSection, 'gdBaseFolder', self.gdBaseFolder)
         self.parser.set(self.mainSection, 'outputFolder', self.outputFolder)   
         
         # write configuration file
