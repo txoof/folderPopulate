@@ -447,38 +447,38 @@ def gDrivePopulate(gdBaseFolderURL = '', gradeFoldersFile = './gradefolders.txt'
     
     gdBaseFolderId = urlsplit(gdBaseFolderURL).path.split('/')[-1]
     
-    # this needs to be moved out of this def and moved into the main loop of the other program
-    # init the log; this removes any old log handlers (this is particularly useful when testing in an IDE)
-    log = logging.getLogger()
-    logging.getLogger("googleapiclient").setLevel(logging.ERROR)
+#     # this needs to be moved out of this def and moved into the main loop of the other program
+#     # init the log; this removes any old log handlers (this is particularly useful when testing in an IDE)
+#     log = logging.getLogger()
+#     logging.getLogger("googleapiclient").setLevel(logging.ERROR)
 
-    # useful for removing old log handlers when developing from an IDE such as Jupyter
-    if len(log.handlers) > 0:
-        for each in range(0, len(log.handlers)):
-            log.removeHandler(log.handlers[0])
+#     # useful for removing old log handlers when developing from an IDE such as Jupyter
+#     if len(log.handlers) > 0:
+#         for each in range(0, len(log.handlers)):
+#             log.removeHandler(log.handlers[0])
     
     
-    # set the log format
-    logFormatter = logging.Formatter('[%(levelname)8s %(asctime)s] %(message)s', '%Y-%m-%d %H:%M')
-    #consoleFormatter = logging.Formatter('[%(levelname)-8s] %(message)s')
-    consoleFormatter = logging.Formatter('[%(levelno)-3s] %(message)s')
-    # set root logger
-    rootLogger = logging.getLogger()       
+#     # set the log format
+#     logFormatter = logging.Formatter('[%(levelname)8s %(asctime)s] %(message)s', '%Y-%m-%d %H:%M')
+#     #consoleFormatter = logging.Formatter('[%(levelname)-8s] %(message)s')
+#     consoleFormatter = logging.Formatter('[%(levelno)-3s] %(message)s')
+#     # set root logger
+#     rootLogger = logging.getLogger()       
     
-    # set the logging level for the api discovery service to "ERROR"
-    logging.getLogger('discovery').setLevel(logging.ERROR)
+#     # set the logging level for the api discovery service to "ERROR"
+#     logging.getLogger('discovery').setLevel(logging.ERROR)
 
     
-    # add a conshole handle to the root logger
-    consoleHandler = logging.StreamHandler(sys.stdout)
-#     consoleHandler.setFormatter(logFormatter)
-    consoleHandler.setFormatter(consoleFormatter)
-    rootLogger.addHandler(consoleHandler) 
+#     # add a conshole handle to the root logger
+#     consoleHandler = logging.StreamHandler(sys.stdout)
+# #     consoleHandler.setFormatter(logFormatter)
+#     consoleHandler.setFormatter(consoleFormatter)
+#     rootLogger.addHandler(consoleHandler) 
     
-    # Set default logging level
-    rootLogger.setLevel(logging.DEBUG)
-#     rootLogger.setLevel(logging.WARNING)
-#     rootLogger.setLevel(logging.INFO)
+#     # Set default logging level
+#     rootLogger.setLevel(logging.DEBUG)
+# #     rootLogger.setLevel(logging.WARNING)
+# #     rootLogger.setLevel(logging.INFO)
     
         
     logging.info('checking google credentials')
@@ -825,9 +825,9 @@ def gDrivePopulate(gdBaseFolderURL = '', gradeFoldersFile = './gradefolders.txt'
 
 # In[16]:
 
-foo = gDrivePopulate(gdBaseFolderURL = 'https://drive.google.com/drive/folders/0B9WTleJ1MzaYcmdmTWNNNF9pa1E',
-                    gradeFoldersFile = './gradefolders.txt', 
-                    client_secret = '/Users/aciuffo/.config/portfolioCreator/credentials/portfolioCreator_credentials.json', 
-                    studentInfo = 'student_export.text')
+# foo = gDrivePopulate(gdBaseFolderURL = 'https://drive.google.com/drive/folders/0B9WTleJ1MzaYcmdmTWNNNF9pa1E',
+#                     gradeFoldersFile = './gradefolders.txt', 
+#                     client_secret = '/Users/aciuffo/.config/portfolioCreator/credentials/portfolioCreator_credentials.json', 
+#                     studentInfo = 'student_export.text')
 
 
