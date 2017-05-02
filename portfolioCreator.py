@@ -14,7 +14,7 @@ from datetime import datetime
 from gDrivePopulate import *
 oldstdout = sys.stdout
 APP_SHORT_NAME = 'portfolioCreator'
-APP_VERSION = '2017.04.28_11:23'
+APP_VERSION = '2017.05.02_18:21'
 ABOUT = 'Written by Aaron Ciuffo aciuffo@ash.nl'
 
 
@@ -39,7 +39,7 @@ class StdoutRedirector(IORedirector):
         pass
 
 
-# In[3]:
+# In[ ]:
 
 def getWorkingPath():
     if getattr(sys, 'frozen', False):
@@ -50,7 +50,7 @@ def getWorkingPath():
     return(bundle_dir)
 
 
-# In[6]:
+# In[ ]:
 
 class myApp(object):
     def __init__(self, master):
@@ -74,8 +74,6 @@ class myApp(object):
         #client secret file
         self.clientSecret = os.path.join(getWorkingPath(), 'client_secret_folderPopulate.json')
         
-        # output filename
-        self.outputFile = datetime.now().strftime('Student_Data_Output_%Y%m%d-%H.%M.csv')
         
         # attributes to pass to the google drive object
         #self.gdBaseFolder = 'https: //drive.google.com/PASTE/LINK/FOR/ASSESSMENT/FOLDER/URL/HERE'

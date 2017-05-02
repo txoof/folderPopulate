@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[1]:
+# In[9]:
 
 import sys
 import re
@@ -46,7 +46,7 @@ APP_SHORT_NAME = 'portfolioCreator'
 # 
 # 
 
-# In[2]:
+# In[3]:
 
 def strip_accents(s):
     s = unicode(s, "utf-8")
@@ -54,7 +54,7 @@ def strip_accents(s):
         if unicodedata.category(c) != 'Mn')
 
 
-# In[3]:
+# In[4]:
 
 def get_valid_filename(s):
     """
@@ -66,7 +66,7 @@ def get_valid_filename(s):
     return re.sub(r'(?u)[^-\w., ]', '', s)
 
 
-# In[4]:
+# In[5]:
 
 def fileRead(fname):
     '''
@@ -84,7 +84,7 @@ def fileRead(fname):
         return(False)
 
 
-# In[5]:
+# In[6]:
 
 def pathify(parts = [], basepath = ''):
     '''
@@ -107,7 +107,7 @@ def pathify(parts = [], basepath = ''):
     return(path)
 
 
-# In[6]:
+# In[7]:
 
 def getWorkingPath():
     if getattr(sys, 'frozen', False):
@@ -118,7 +118,7 @@ def getWorkingPath():
     return(bundle_dir)
 
 
-# In[7]:
+# In[8]:
 
 def getCredentials(config_path = os.path.expanduser('~/.config/'+APP_SHORT_NAME), 
                    client_secret = './client_secret+'+APP_SHORT_NAME+'.json'):
@@ -439,7 +439,7 @@ class gDrive():
         pass
 
 
-# In[15]:
+# In[10]:
 
 # alternatively pass in the configuration object?
 def gDrivePopulate(gdBaseFolderURL = '', gradeFoldersFile = './gradefolders.txt', 
@@ -531,7 +531,7 @@ def gDrivePopulate(gdBaseFolderURL = '', gradeFoldersFile = './gradefolders.txt'
     # Grade folders created
     foldersCreated = 0
     
-    outputFileName = 'Student_URLs-'+datetime.today().strftime('%Y-%m-%d_%H.%M')+'.csv'
+    outputFileName = 'Student_Output_Data-'+datetime.today().strftime('%Y-%m-%d_%H.%M')+'.tsv'
     
     # list of folders to add under each students' path
     logging.info('reading list of folders to create for each student:')
@@ -786,11 +786,13 @@ def gDrivePopulate(gdBaseFolderURL = '', gradeFoldersFile = './gradefolders.txt'
                 foldersCreated += 1
                 
     
-    ### Generate CSV output from Student Links
+    ### Generate TSV output from Student Links
+    # power school import tool needs a TSV rather than a CSV for imports. (STUPID)
+    
     csvHeader.append('StudentURL')
-    headerFmtString = '{}, {}, {}\n'.format(csvHeader[headerMap['LastFirst']], csvHeader[headerMap['Student_Number']], 
+    headerFmtString = '{}\t{}\t{}\n'.format(csvHeader[headerMap['LastFirst']], csvHeader[headerMap['Student_Number']], 
                     csvHeader[-1])
-    csvFmtString = '"{}", {}, "<a href={}>Student Portfolio for {}</a>"\n'
+    csvFmtString = '"{}"\t{}\t"<a href={}>Student Portfolio for {}</a>"\n'
     # update to use passed in output folder
 #     studentURLData = os.path.expanduser('~/Desktop/Student_URL_Data.csv')
     studentURLData = os.path.join(os.path.expanduser(outputPath), outputFileName)
@@ -809,7 +811,7 @@ def gDrivePopulate(gdBaseFolderURL = '', gradeFoldersFile = './gradefolders.txt'
             logging.warn(each)
     
     
-    logging.info('writing CSV file: {}'.format(studentURLData))
+    logging.info('writing TSV file: {}'.format(studentURLData))
     try:
         with open(studentURLData, 'w') as f:
             f.write(headerFmtString)
