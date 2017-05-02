@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[4]:
+# In[1]:
 
 import sys
 import re
@@ -46,7 +46,7 @@ APP_SHORT_NAME = 'portfolioCreator'
 # 
 # 
 
-# In[ ]:
+# In[2]:
 
 def strip_accents(s):
     s = unicode(s, "utf-8")
@@ -54,7 +54,7 @@ def strip_accents(s):
         if unicodedata.category(c) != 'Mn')
 
 
-# In[ ]:
+# In[3]:
 
 def get_valid_filename(s):
     """
@@ -66,7 +66,7 @@ def get_valid_filename(s):
     return re.sub(r'(?u)[^-\w., ]', '', s)
 
 
-# In[ ]:
+# In[4]:
 
 def fileRead(fname):
     '''
@@ -84,7 +84,7 @@ def fileRead(fname):
         return(False)
 
 
-# In[ ]:
+# In[5]:
 
 def pathify(parts = [], basepath = ''):
     '''
@@ -107,7 +107,7 @@ def pathify(parts = [], basepath = ''):
     return(path)
 
 
-# In[3]:
+# In[6]:
 
 def getWorkingPath():
     if getattr(sys, 'frozen', False):
@@ -118,7 +118,7 @@ def getWorkingPath():
     return(bundle_dir)
 
 
-# In[ ]:
+# In[7]:
 
 def getCredentials(config_path = os.path.expanduser('~/.config/'+APP_SHORT_NAME), 
                    client_secret = './client_secret+'+APP_SHORT_NAME+'.json'):
@@ -160,13 +160,13 @@ def getCredentials(config_path = os.path.expanduser('~/.config/'+APP_SHORT_NAME)
     
 
 
-# In[ ]:
+# In[8]:
 
 class GDriveError(Exception):
     pass
 
 
-# In[ ]:
+# In[9]:
 
 class gDrive():
     '''
@@ -439,7 +439,7 @@ class gDrive():
         pass
 
 
-# In[ ]:
+# In[15]:
 
 # alternatively pass in the configuration object?
 def gDrivePopulate(gdBaseFolderURL = '', gradeFoldersFile = './gradefolders.txt', 
@@ -447,37 +447,37 @@ def gDrivePopulate(gdBaseFolderURL = '', gradeFoldersFile = './gradefolders.txt'
     
     gdBaseFolderId = urlsplit(gdBaseFolderURL).path.split('/')[-1]
     
-#     # this needs to be moved out of this def and moved into the main loop of the other program
-#     # init the log; this removes any old log handlers (this is particularly useful when testing in an IDE)
-#     log = logging.getLogger()
-#     logging.getLogger("googleapiclient").setLevel(logging.WARNING)
+    # this needs to be moved out of this def and moved into the main loop of the other program
+    # init the log; this removes any old log handlers (this is particularly useful when testing in an IDE)
+    log = logging.getLogger()
+    logging.getLogger("googleapiclient").setLevel(logging.ERROR)
 
-#     # useful for removing old log handlers when developing from an IDE such as Jupyter
-#     if len(log.handlers) > 0:
-#         for each in range(0, len(log.handlers)):
-#             log.removeHandler(log.handlers[0])
+    # useful for removing old log handlers when developing from an IDE such as Jupyter
+    if len(log.handlers) > 0:
+        for each in range(0, len(log.handlers)):
+            log.removeHandler(log.handlers[0])
     
     
-#     # set the log format
-#     logFormatter = logging.Formatter('[%(levelname)8s %(asctime)s] %(message)s', '%Y-%m-%d %H:%M')
-#     #consoleFormatter = logging.Formatter('[%(levelname)-8s] %(message)s')
-#     consoleFormatter = logging.Formatter('[%(levelno)-3s] %(message)s')
-#     # set root logger
-#     rootLogger = logging.getLogger()       
+    # set the log format
+    logFormatter = logging.Formatter('[%(levelname)8s %(asctime)s] %(message)s', '%Y-%m-%d %H:%M')
+    #consoleFormatter = logging.Formatter('[%(levelname)-8s] %(message)s')
+    consoleFormatter = logging.Formatter('[%(levelno)-3s] %(message)s')
+    # set root logger
+    rootLogger = logging.getLogger()       
     
-#     # set the logging level for the api discovery service to "ERROR"
-#     logging.getLogger('discovery').setLevel(logging.ERROR)
+    # set the logging level for the api discovery service to "ERROR"
+    logging.getLogger('discovery').setLevel(logging.ERROR)
 
     
-#     # add a conshole handle to the root logger
-#     consoleHandler = logging.StreamHandler(sys.stdout)
-# #     consoleHandler.setFormatter(logFormatter)
-#     consoleHandler.setFormatter(consoleFormatter)
-#     rootLogger.addHandler(consoleHandler) 
+    # add a conshole handle to the root logger
+    consoleHandler = logging.StreamHandler(sys.stdout)
+#     consoleHandler.setFormatter(logFormatter)
+    consoleHandler.setFormatter(consoleFormatter)
+    rootLogger.addHandler(consoleHandler) 
     
-#     # Set default logging level
-# #     rootLogger.setLevel(logging.DEBUG)
-# #     rootLogger.setLevel(logging.WARNING)
+    # Set default logging level
+    rootLogger.setLevel(logging.DEBUG)
+#     rootLogger.setLevel(logging.WARNING)
 #     rootLogger.setLevel(logging.INFO)
     
         
@@ -617,7 +617,7 @@ def gDrivePopulate(gdBaseFolderURL = '', gradeFoldersFile = './gradefolders.txt'
         logging.critical(gdBaseFolderURL)
         return(False)
 
-    ### loop through students
+    ### loop through students in the 
     logging.info('Searching for existing google drive folders and creating missing folders...')
     for index, student in enumerate(studentCSV):
     
@@ -735,7 +735,14 @@ def gDrivePopulate(gdBaseFolderURL = '', gradeFoldersFile = './gradefolders.txt'
             
         logging.debug('{:>5}student data: {}'.format('', student))
         logging.debug('{:>5}webViewLink: {}'.format('', folder.get('webViewLink')))
-        student.append(gdStudentFolder.get('webViewLink'))
+        logging.debug('{:>5}(API v2) embedLink: {}'.format(
+            '','https://drive.google.com/a/ash.nl/embeddedfolderview?id='+gdStudentFolder.get('id')) )
+        # the webViewLink will not display properly in an iFrame
+        # this method is supported in v2 of the API (embedLink), but not V3; 
+        # this is a hack and may break when v2 is depricated
+        # - https://drive.google.com/a/ash.nl/embeddedfolderview?id=
+        student.append('https://drive.google.com/a/ash.nl/embeddedfolderview?id='+gdStudentFolder.get('id'))
+        #student.append(gdStudentFolder.get('webViewLink'))
         studentLinks.append(student)
             
         
@@ -816,11 +823,11 @@ def gDrivePopulate(gdBaseFolderURL = '', gradeFoldersFile = './gradefolders.txt'
         
 
 
-# In[ ]:
+# In[16]:
 
-# foo = gDrivePopulate(gdBaseFolderURL = 'https://drive.google.com/drive/folders/0B9WTleJ1MzaYcmdmTWNNNF9pa1E',
-#                     gradeFoldersFile = './gradefolders.txt', 
-#                     client_secret = '~/.config/populate/populate-credentials.json', 
-#                     studentInfo = 'student_export.text')
+foo = gDrivePopulate(gdBaseFolderURL = 'https://drive.google.com/drive/folders/0B9WTleJ1MzaYcmdmTWNNNF9pa1E',
+                    gradeFoldersFile = './gradefolders.txt', 
+                    client_secret = '/Users/aciuffo/.config/portfolioCreator/credentials/portfolioCreator_credentials.json', 
+                    studentInfo = 'student_export.text')
 
 
