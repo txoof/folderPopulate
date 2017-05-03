@@ -792,7 +792,7 @@ def gDrivePopulate(gdBaseFolderURL = '', gradeFoldersFile = './gradefolders.txt'
     csvHeader.append('StudentURL')
     headerFmtString = '{}\t{}\t{}\n'.format(csvHeader[headerMap['LastFirst']], csvHeader[headerMap['Student_Number']], 
                     csvHeader[-1])
-    csvFmtString = '"{}"\t{}\t"<a href={}>Student Portfolio for {}</a>"\n'
+    csvFmtString = '{}\t{}\t<a href={}>Student Portfolio for {}</a>\n'
     # update to use passed in output folder
 #     studentURLData = os.path.expanduser('~/Desktop/Student_URL_Data.csv')
     studentURLData = os.path.join(os.path.expanduser(outputPath), outputFileName)
