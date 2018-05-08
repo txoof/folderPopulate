@@ -81,6 +81,7 @@ class menu(object):
         if self.name:
             print '='*5, self.name, '='*5
         self.printMenu()
+        print 'Choose from the options listed'
         if optional:
             choice = raw_input('{0:2d} - {1:-1d} or {2}: '.format(1, self.size, optchoices))
         else:
