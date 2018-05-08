@@ -1,0 +1,392 @@
+18-05-07 20:53:39 INFO - main: ===================== Starting Log =====================
+18-05-07 20:53:39 DEBUG - checkFSMount: Searching for Google Drive File Stream Mount Points
+18-05-07 20:53:39 INFO - checkFSMount: Google Drive File Stream appears to not be running
+18-05-07 20:53:39 INFO - main: Attempting to start Google Drive File Stream
+18-05-07 20:53:39 WARNING - main: OS Error: Command '['open', '-a', 'Google Drive File Stream']' returned non-zero exit status 1
+18-05-07 20:53:39 CRITICAL - main: Google Drive File Stream does not appear to be installed. Please download from the link below
+18-05-07 20:53:39 CRITICAL - main: https://support.google.com/drive/answer/7329379?hl=en
+18-05-07 20:53:39 CRITICAL - main: exiting
+18-05-08 19:02:27 INFO - main: ===================== Starting Log =====================
+18-05-08 19:02:27 DEBUG - checkFSMount: Searching for Google Drive File Stream Mount Points
+18-05-08 19:02:27 DEBUG - checkFSMount: Found what appears to be a valid mountpoint at: /Volumes/GoogleDrive
+18-05-08 19:02:27 DEBUG - main: getting configuration
+18-05-08 19:02:27 DEBUG - __init__: starting configuration check
+18-05-08 19:02:27 DEBUG - __init__: config path: ~/.config/fileStreamPortfolio
+18-05-08 19:02:27 DEBUG - __init__: config file: /Users/aaronciuffo/.config/fileStreamPortfolio/config.ini
+18-05-08 19:02:27 DEBUG - getConfig: getting configuration file
+18-05-08 19:02:27 WARNING - getConfig: no configuration files found at: /Users/aaronciuffo/.config/fileStreamPortfolio/config.ini
+18-05-08 19:02:27 INFO - getConfig: creating configuration directory
+18-05-08 19:02:27 INFO - getConfig: 
+18-05-08 19:02:27 INFO - main: === Current Configuration Settings ===
+18-05-08 19:02:27 INFO - main: teamdrive -- 
+18-05-08 19:02:27 INFO - main: mountpoint -- /Volumes/GoogleDrive
+18-05-08 19:02:27 INFO - main: portfoliofolder -- 
+18-05-08 19:02:27 INFO - main: gradefolders -- ./gradefolders.txt
+18-05-08 19:02:27 DEBUG - getDrives: Searching for Google Drive File Stream Mount Points
+18-05-08 19:02:27 INFO - main: no teamdrive set in configuration file
+18-05-08 19:02:27 DEBUG - getTeamDrive: getting Team Drive name
+18-05-08 19:02:27 DEBUG - getDrives: Searching for Google Drive File Stream Mount Points
+18-05-08 19:02:33 INFO - main: no portfolio folder set in configuration file
+18-05-08 19:02:33 DEBUG - getPortfolioFolder: beggining search for portfolio folder
+18-05-08 19:02:38 DEBUG - getPortfolioFolder: searching TD "IT Blabla" for "Port"
+18-05-08 19:02:38 DEBUG - getPortfolioFolder: found 4 matches
+18-05-08 19:02:42 DEBUG - getStudentFile: getting student_export.text file
+18-05-08 19:02:57 DEBUG - fileSearch: searching path: ~/Downloads/ for text
+18-05-08 19:03:00 DEBUG - askContinue: prompting to continue
+18-05-08 19:03:00 DEBUG - askContinue: teamdrive: IT Blabla
+18-05-08 19:03:00 DEBUG - askContinue: portfolio folder: /Volumes/GoogleDrive/Team Drives/IT Blabla/c/b/a/Portfolios
+18-05-08 19:03:03 INFO - askContinue: using portfolio folder: /Volumes/GoogleDrive/Team Drives/IT Blabla/c/b/a/Portfolios
+18-05-08 19:03:03 DEBUG - writeConfig: writing configuration to file: /Users/aaronciuffo/.config/fileStreamPortfolio/config.ini
+18-05-08 19:03:03 INFO - main: checking for alternative gradefolder.txt on Desktop
+18-05-08 19:03:03 INFO - main: alternative not found; continuing with ./gradefolders.txt
+18-05-08 19:03:03 INFO - main: opening grade folders file: ./gradefolders.txt
+18-05-08 19:03:03 INFO - readCSV: parsing CSV /Users/aaronciuffo/Downloads/student_export.text
+18-05-08 19:03:03 INFO - readCSV: 2 student records found
+18-05-08 19:03:03 INFO - mapHeaders: checking for expected headers
+18-05-08 19:03:03 INFO - lookup: looking up index: 0 for key: ClassOf
+18-05-08 19:03:03 INFO - lookup: looking up index: 0 for key: LastFirst
+18-05-08 19:03:03 INFO - lookup: looking up index: 0 for key: Student_Number
+18-05-08 19:03:03 INFO - lookup: looking up index: 1 for key: ClassOf
+18-05-08 19:03:03 INFO - lookup: looking up index: 1 for key: LastFirst
+18-05-08 19:03:03 INFO - lookup: looking up index: 1 for key: Student_Number
+18-05-08 19:03:03 INFO - main: attempting to create directory: /Volumes/GoogleDrive/Team Drives/IT Blabla/c/b/a/Portfolios/Class Of-3099/OneEye, Leela - 1138
+18-05-08 19:03:03 INFO - main: directory exists, skipping
+18-05-08 19:03:03 INFO - main: attempting to create directory: /Volumes/GoogleDrive/Team Drives/IT Blabla/c/b/a/Portfolios/Class Of-9990/Coyle, Jessie - 97777
+18-05-08 19:03:03 INFO - main: directory exists, skipping
+18-05-08 19:03:03 INFO - main: successfully created 0 of 2 student directories
+18-05-08 19:03:03 INFO - main: skipped: 2
+18-05-08 19:03:03 INFO - main: errors: 0
+18-05-08 19:03:37 INFO - main: ===================== Starting Log =====================
+18-05-08 19:03:37 DEBUG - checkFSMount: Searching for Google Drive File Stream Mount Points
+18-05-08 19:03:37 DEBUG - checkFSMount: Found what appears to be a valid mountpoint at: /Volumes/GoogleDrive
+18-05-08 19:03:37 DEBUG - main: getting configuration
+18-05-08 19:03:37 DEBUG - __init__: starting configuration check
+18-05-08 19:03:37 DEBUG - __init__: config path: ~/.config/fileStreamPortfolio
+18-05-08 19:03:37 DEBUG - __init__: config file: /Users/aaronciuffo/.config/fileStreamPortfolio/config.ini
+18-05-08 19:03:37 DEBUG - getConfig: getting configuration file
+18-05-08 19:03:37 INFO - main: === Current Configuration Settings ===
+18-05-08 19:03:37 INFO - main: teamdrive -- IT Blabla
+18-05-08 19:03:37 INFO - main: mountpoint -- /Volumes/GoogleDrive
+18-05-08 19:03:37 INFO - main: portfoliofolder -- /Volumes/GoogleDrive/Team Drives/IT Blabla/c/b/a/Portfolios
+18-05-08 19:03:37 INFO - main: gradefolders -- ./gradefolders.txt
+18-05-08 19:03:37 DEBUG - getDrives: Searching for Google Drive File Stream Mount Points
+18-05-08 19:03:37 DEBUG - getStudentFile: getting student_export.text file
+18-05-08 19:03:43 DEBUG - fileSearch: searching path: ~/Downloads/ for text
+18-05-08 19:03:45 DEBUG - askContinue: prompting to continue
+18-05-08 19:03:45 DEBUG - askContinue: teamdrive: IT Blabla
+18-05-08 19:03:45 DEBUG - askContinue: portfolio folder: /Volumes/GoogleDrive/Team Drives/IT Blabla/c/b/a/Portfolios
+18-05-08 19:03:48 DEBUG - getTeamDrive: getting Team Drive name
+18-05-08 19:03:48 DEBUG - getDrives: Searching for Google Drive File Stream Mount Points
+18-05-08 19:03:51 DEBUG - getPortfolioFolder: beggining search for portfolio folder
+18-05-08 19:03:53 DEBUG - getPortfolioFolder: searching TD "IT Blabla" for "Port"
+18-05-08 19:03:53 DEBUG - getPortfolioFolder: found 4 matches
+18-05-08 19:04:11 DEBUG - askContinue: prompting to continue
+18-05-08 19:04:11 DEBUG - askContinue: teamdrive: IT Blabla
+18-05-08 19:04:11 DEBUG - askContinue: portfolio folder: /Volumes/GoogleDrive/Team Drives/IT Blabla/c/b/a/Portfolios
+18-05-08 19:04:12 INFO - askContinue: using portfolio folder: /Volumes/GoogleDrive/Team Drives/IT Blabla/c/b/a/Portfolios
+18-05-08 19:04:12 DEBUG - writeConfig: writing configuration to file: /Users/aaronciuffo/.config/fileStreamPortfolio/config.ini
+18-05-08 19:04:12 INFO - main: checking for alternative gradefolder.txt on Desktop
+18-05-08 19:04:12 INFO - main: alternative not found; continuing with ./gradefolders.txt
+18-05-08 19:04:12 INFO - main: opening grade folders file: ./gradefolders.txt
+18-05-08 19:04:12 INFO - readCSV: parsing CSV /Users/aaronciuffo/Downloads/student_export.text
+18-05-08 19:04:12 INFO - readCSV: 2 student records found
+18-05-08 19:04:12 INFO - mapHeaders: checking for expected headers
+18-05-08 19:04:12 INFO - lookup: looking up index: 0 for key: ClassOf
+18-05-08 19:04:12 INFO - lookup: looking up index: 0 for key: LastFirst
+18-05-08 19:04:12 INFO - lookup: looking up index: 0 for key: Student_Number
+18-05-08 19:04:12 INFO - lookup: looking up index: 1 for key: ClassOf
+18-05-08 19:04:12 INFO - lookup: looking up index: 1 for key: LastFirst
+18-05-08 19:04:12 INFO - lookup: looking up index: 1 for key: Student_Number
+18-05-08 19:04:12 INFO - main: attempting to create directory: /Volumes/GoogleDrive/Team Drives/IT Blabla/c/b/a/Portfolios/Class Of-3099/OneEye, Leela - 1138
+18-05-08 19:04:12 INFO - main: directory exists, skipping
+18-05-08 19:04:12 INFO - main: attempting to create directory: /Volumes/GoogleDrive/Team Drives/IT Blabla/c/b/a/Portfolios/Class Of-9990/Coyle, Jessie - 97777
+18-05-08 19:04:12 INFO - main: directory exists, skipping
+18-05-08 19:04:12 INFO - main: successfully created 0 of 2 student directories
+18-05-08 19:04:12 INFO - main: skipped: 2
+18-05-08 19:04:12 INFO - main: errors: 0
+18-05-08 19:05:31 INFO - main: ===================== Starting Log =====================
+18-05-08 19:05:31 DEBUG - checkFSMount: Searching for Google Drive File Stream Mount Points
+18-05-08 19:05:31 DEBUG - checkFSMount: Found what appears to be a valid mountpoint at: /Volumes/GoogleDrive
+18-05-08 19:05:31 DEBUG - main: getting configuration
+18-05-08 19:05:31 DEBUG - __init__: starting configuration check
+18-05-08 19:05:31 DEBUG - __init__: config path: ~/.config/fileStreamPortfolio
+18-05-08 19:05:31 DEBUG - __init__: config file: /Users/aaronciuffo/.config/fileStreamPortfolio/config.ini
+18-05-08 19:05:31 DEBUG - getConfig: getting configuration file
+18-05-08 19:05:31 INFO - main: === Current Configuration Settings ===
+18-05-08 19:05:31 INFO - main: teamdrive -- IT Blabla
+18-05-08 19:05:31 INFO - main: mountpoint -- /Volumes/GoogleDrive
+18-05-08 19:05:31 INFO - main: portfoliofolder -- /Volumes/GoogleDrive/Team Drives/IT Blabla/c/b/a/Portfolios
+18-05-08 19:05:31 INFO - main: gradefolders -- ./gradefolders.txt
+18-05-08 19:05:31 DEBUG - getDrives: Searching for Google Drive File Stream Mount Points
+18-05-08 19:05:31 DEBUG - getStudentFile: getting student_export.text file
+18-05-08 19:05:43 DEBUG - fileSearch: searching path: ~/Downloads/ for text
+18-05-08 19:05:47 DEBUG - askContinue: prompting to continue
+18-05-08 19:05:47 DEBUG - askContinue: teamdrive: IT Blabla
+18-05-08 19:05:47 DEBUG - askContinue: portfolio folder: /Volumes/GoogleDrive/Team Drives/IT Blabla/c/b/a/Portfolios
+18-05-08 19:06:17 INFO - main: ===================== Starting Log =====================
+18-05-08 19:06:17 DEBUG - checkFSMount: Searching for Google Drive File Stream Mount Points
+18-05-08 19:06:17 DEBUG - checkFSMount: Found what appears to be a valid mountpoint at: /Volumes/GoogleDrive
+18-05-08 19:06:17 DEBUG - main: getting configuration
+18-05-08 19:06:17 DEBUG - __init__: starting configuration check
+18-05-08 19:06:17 DEBUG - __init__: config path: ~/.config/fileStreamPortfolio
+18-05-08 19:06:17 DEBUG - __init__: config file: /Users/aaronciuffo/.config/fileStreamPortfolio/config.ini
+18-05-08 19:06:17 DEBUG - getConfig: getting configuration file
+18-05-08 19:06:17 INFO - main: === Current Configuration Settings ===
+18-05-08 19:06:17 INFO - main: teamdrive -- IT Blabla
+18-05-08 19:06:17 INFO - main: mountpoint -- /Volumes/GoogleDrive
+18-05-08 19:06:17 INFO - main: portfoliofolder -- /Volumes/GoogleDrive/Team Drives/IT Blabla/c/b/a/Portfolios
+18-05-08 19:06:17 INFO - main: gradefolders -- ./gradefolders.txt
+18-05-08 19:06:17 DEBUG - getDrives: Searching for Google Drive File Stream Mount Points
+18-05-08 19:06:17 DEBUG - getStudentFile: getting student_export.text file
+18-05-08 19:53:00 INFO - main: ===================== Starting Log =====================
+18-05-08 19:53:00 DEBUG - checkFSMount: Searching for Google Drive File Stream Mount Points
+18-05-08 19:53:00 DEBUG - checkFSMount: Found what appears to be a valid mountpoint at: /Volumes/GoogleDrive
+18-05-08 19:53:00 DEBUG - main: getting configuration
+18-05-08 19:53:00 DEBUG - __init__: starting configuration check
+18-05-08 19:53:00 DEBUG - __init__: config path: ~/.config/fileStreamPortfolio
+18-05-08 19:53:00 DEBUG - __init__: config file: /Users/aaronciuffo/.config/fileStreamPortfolio/config.ini
+18-05-08 19:53:00 DEBUG - getConfig: getting configuration file
+18-05-08 19:53:00 INFO - main: === Current Configuration Settings ===
+18-05-08 19:53:00 INFO - main: teamdrive -- IT Blabla
+18-05-08 19:53:00 INFO - main: mountpoint -- /Volumes/GoogleDrive
+18-05-08 19:53:00 INFO - main: portfoliofolder -- /Volumes/GoogleDrive/Team Drives/IT Blabla/c/b/a/Portfolios
+18-05-08 19:53:00 INFO - main: gradefolders -- ./gradefolders.txt
+18-05-08 19:53:00 DEBUG - getDrives: Searching for Google Drive File Stream Mount Points
+18-05-08 19:53:00 DEBUG - getStudentFile: getting student_export.text file
+18-05-08 19:53:22 INFO - main: ===================== Starting Log =====================
+18-05-08 19:53:22 DEBUG - checkFSMount: Searching for Google Drive File Stream Mount Points
+18-05-08 19:53:22 DEBUG - checkFSMount: Found what appears to be a valid mountpoint at: /Volumes/GoogleDrive
+18-05-08 19:53:22 DEBUG - main: getting configuration
+18-05-08 19:53:22 DEBUG - __init__: starting configuration check
+18-05-08 19:53:22 DEBUG - __init__: config path: ~/.config/fileStreamPortfolio
+18-05-08 19:53:22 DEBUG - __init__: config file: /Users/aaronciuffo/.config/fileStreamPortfolio/config.ini
+18-05-08 19:53:22 DEBUG - getConfig: getting configuration file
+18-05-08 19:53:22 INFO - main: === Current Configuration Settings ===
+18-05-08 19:53:22 INFO - main: teamdrive -- IT Blabla
+18-05-08 19:53:22 INFO - main: mountpoint -- /Volumes/GoogleDrive
+18-05-08 19:53:22 INFO - main: portfoliofolder -- /Volumes/GoogleDrive/Team Drives/IT Blabla/c/b/a/Portfolios
+18-05-08 19:53:22 INFO - main: gradefolders -- ./gradefolders.txt
+18-05-08 19:53:22 DEBUG - getDrives: Searching for Google Drive File Stream Mount Points
+18-05-08 19:53:22 DEBUG - getStudentFile: getting student_export.text file
+18-05-08 19:58:47 INFO - main: ===================== Starting Log =====================
+18-05-08 19:58:47 DEBUG - checkFSMount: Searching for Google Drive File Stream Mount Points
+18-05-08 19:58:47 DEBUG - checkFSMount: Found what appears to be a valid mountpoint at: /Volumes/GoogleDrive
+18-05-08 19:58:47 DEBUG - main: getting configuration
+18-05-08 19:58:47 DEBUG - __init__: starting configuration check
+18-05-08 19:58:47 DEBUG - __init__: config path: ~/.config/fileStreamPortfolio
+18-05-08 19:58:47 DEBUG - __init__: config file: /Users/aaronciuffo/.config/fileStreamPortfolio/config.ini
+18-05-08 19:58:47 DEBUG - getConfig: getting configuration file
+18-05-08 19:58:47 INFO - main: === Current Configuration Settings ===
+18-05-08 19:58:47 INFO - main: teamdrive -- IT Blabla
+18-05-08 19:58:47 INFO - main: mountpoint -- /Volumes/GoogleDrive
+18-05-08 19:58:47 INFO - main: portfoliofolder -- /Volumes/GoogleDrive/Team Drives/IT Blabla/c/b/a/Portfolios
+18-05-08 19:58:47 INFO - main: gradefolders -- ./gradefolders.txt
+18-05-08 19:58:47 DEBUG - getDrives: Searching for Google Drive File Stream Mount Points
+18-05-08 19:58:47 DEBUG - getStudentFile: getting student_export.text file
+18-05-08 20:02:34 INFO - main: ===================== Starting Log =====================
+18-05-08 20:02:34 DEBUG - checkFSMount: Searching for Google Drive File Stream Mount Points
+18-05-08 20:02:34 DEBUG - checkFSMount: Found what appears to be a valid mountpoint at: /Volumes/GoogleDrive
+18-05-08 20:02:34 DEBUG - main: getting configuration
+18-05-08 20:02:34 DEBUG - __init__: starting configuration check
+18-05-08 20:02:34 DEBUG - __init__: config path: ~/.config/fileStreamPortfolio
+18-05-08 20:02:34 DEBUG - __init__: config file: /Users/aaronciuffo/.config/fileStreamPortfolio/config.ini
+18-05-08 20:02:34 DEBUG - getConfig: getting configuration file
+18-05-08 20:02:34 INFO - main: === Current Configuration Settings ===
+18-05-08 20:02:34 INFO - main: teamdrive -- IT Blabla
+18-05-08 20:02:34 INFO - main: mountpoint -- /Volumes/GoogleDrive
+18-05-08 20:02:34 INFO - main: portfoliofolder -- /Volumes/GoogleDrive/Team Drives/IT Blabla/c/b/a/Portfolios
+18-05-08 20:02:34 INFO - main: gradefolders -- ./gradefolders.txt
+18-05-08 20:02:34 DEBUG - getDrives: Searching for Google Drive File Stream Mount Points
+18-05-08 20:02:34 DEBUG - getStudentFile: getting student_export.text file
+18-05-08 20:03:12 INFO - main: ===================== Starting Log =====================
+18-05-08 20:03:12 DEBUG - checkFSMount: Searching for Google Drive File Stream Mount Points
+18-05-08 20:03:12 DEBUG - checkFSMount: Found what appears to be a valid mountpoint at: /Volumes/GoogleDrive
+18-05-08 20:03:12 DEBUG - main: getting configuration
+18-05-08 20:03:12 DEBUG - __init__: starting configuration check
+18-05-08 20:03:12 DEBUG - __init__: config path: ~/.config/fileStreamPortfolio
+18-05-08 20:03:12 DEBUG - __init__: config file: /Users/aaronciuffo/.config/fileStreamPortfolio/config.ini
+18-05-08 20:03:12 DEBUG - getConfig: getting configuration file
+18-05-08 20:03:12 INFO - main: === Current Configuration Settings ===
+18-05-08 20:03:12 INFO - main: teamdrive -- IT Blabla
+18-05-08 20:03:12 INFO - main: mountpoint -- /Volumes/GoogleDrive
+18-05-08 20:03:12 INFO - main: portfoliofolder -- /Volumes/GoogleDrive/Team Drives/IT Blabla/c/b/a/Portfolios
+18-05-08 20:03:12 INFO - main: gradefolders -- ./gradefolders.txt
+18-05-08 20:03:12 DEBUG - getDrives: Searching for Google Drive File Stream Mount Points
+18-05-08 20:03:12 DEBUG - getStudentFile: getting student_export.text file
+18-05-08 20:11:16 INFO - main: ===================== Starting Log =====================
+18-05-08 20:11:16 DEBUG - checkFSMount: Searching for Google Drive File Stream Mount Points
+18-05-08 20:11:16 DEBUG - checkFSMount: Found what appears to be a valid mountpoint at: /Volumes/GoogleDrive
+18-05-08 20:11:16 DEBUG - main: getting configuration
+18-05-08 20:11:16 DEBUG - __init__: starting configuration check
+18-05-08 20:11:16 DEBUG - __init__: config path: ~/.config/fileStreamPortfolio
+18-05-08 20:11:16 DEBUG - __init__: config file: /Users/aaronciuffo/.config/fileStreamPortfolio/config.ini
+18-05-08 20:11:16 DEBUG - getConfig: getting configuration file
+18-05-08 20:11:16 INFO - main: === Current Configuration Settings ===
+18-05-08 20:11:16 INFO - main: teamdrive -- IT Blabla
+18-05-08 20:11:16 INFO - main: mountpoint -- /Volumes/GoogleDrive
+18-05-08 20:11:16 INFO - main: portfoliofolder -- /Volumes/GoogleDrive/Team Drives/IT Blabla/c/b/a/Portfolios
+18-05-08 20:11:16 INFO - main: gradefolders -- ./gradefolders.txt
+18-05-08 20:11:16 DEBUG - getDrives: Searching for Google Drive File Stream Mount Points
+18-05-08 20:11:16 DEBUG - getStudentFile: getting student_export.text file
+18-05-08 20:11:20 DEBUG - fileSearch: searching path: ~/Downloads/ for text
+18-05-08 20:11:21 DEBUG - askContinue: prompting to continue
+18-05-08 20:11:21 DEBUG - askContinue: teamdrive: IT Blabla
+18-05-08 20:11:21 DEBUG - askContinue: portfolio folder: /Volumes/GoogleDrive/Team Drives/IT Blabla/c/b/a/Portfolios
+18-05-08 20:11:23 INFO - askContinue: using portfolio folder: /Volumes/GoogleDrive/Team Drives/IT Blabla/c/b/a/Portfolios
+18-05-08 20:11:23 DEBUG - writeConfig: writing configuration to file: /Users/aaronciuffo/.config/fileStreamPortfolio/config.ini
+18-05-08 20:11:23 INFO - main: checking for alternative gradefolder.txt on Desktop
+18-05-08 20:11:23 INFO - main: alternative not found; continuing with ./gradefolders.txt
+18-05-08 20:11:23 INFO - main: opening grade folders file: ./gradefolders.txt
+18-05-08 20:11:23 INFO - readCSV: parsing CSV /Users/aaronciuffo/Downloads/student_export.text
+18-05-08 20:11:23 INFO - readCSV: 2 student records found
+18-05-08 20:11:23 INFO - mapHeaders: checking for expected headers
+18-05-08 20:11:23 INFO - lookup: looking up index: 0 for key: ClassOf
+18-05-08 20:11:23 INFO - lookup: looking up index: 0 for key: LastFirst
+18-05-08 20:11:23 INFO - lookup: looking up index: 0 for key: Student_Number
+18-05-08 20:11:23 INFO - lookup: looking up index: 1 for key: ClassOf
+18-05-08 20:11:23 INFO - lookup: looking up index: 1 for key: LastFirst
+18-05-08 20:11:23 INFO - lookup: looking up index: 1 for key: Student_Number
+18-05-08 20:11:23 INFO - main: attempting to create directory: /Volumes/GoogleDrive/Team Drives/IT Blabla/c/b/a/Portfolios/Class Of-3099/OneEye, Leela - 1138
+18-05-08 20:11:23 INFO - main: directory exists, skipping
+18-05-08 20:11:23 INFO - main: attempting to create directory: /Volumes/GoogleDrive/Team Drives/IT Blabla/c/b/a/Portfolios/Class Of-9990/Coyle, Jessie - 97777
+18-05-08 20:11:23 INFO - main: directory exists, skipping
+18-05-08 20:11:23 INFO - main: successfully created 0 of 2 student directories
+18-05-08 20:11:23 INFO - main: skipped: 2
+18-05-08 20:11:23 INFO - main: errors: 0
+18-05-08 20:12:50 INFO - main: ===================== Starting Log =====================
+18-05-08 20:12:50 DEBUG - checkFSMount: Searching for Google Drive File Stream Mount Points
+18-05-08 20:12:50 DEBUG - checkFSMount: Found what appears to be a valid mountpoint at: /Volumes/GoogleDrive
+18-05-08 20:12:50 DEBUG - main: getting configuration
+18-05-08 20:12:50 DEBUG - __init__: starting configuration check
+18-05-08 20:12:50 DEBUG - __init__: config path: ~/.config/fileStreamPortfolio
+18-05-08 20:12:50 DEBUG - __init__: config file: /Users/aaronciuffo/.config/fileStreamPortfolio/config.ini
+18-05-08 20:12:50 DEBUG - getConfig: getting configuration file
+18-05-08 20:12:50 INFO - main: === Current Configuration Settings ===
+18-05-08 20:12:50 INFO - main: teamdrive -- IT Blabla
+18-05-08 20:12:50 INFO - main: mountpoint -- /Volumes/GoogleDrive
+18-05-08 20:12:50 INFO - main: portfoliofolder -- /Volumes/GoogleDrive/Team Drives/IT Blabla/c/b/a/Portfolios
+18-05-08 20:12:50 INFO - main: gradefolders -- ./gradefolders.txt
+18-05-08 20:12:50 DEBUG - getDrives: Searching for Google Drive File Stream Mount Points
+18-05-08 20:12:50 DEBUG - getStudentFile: getting student_export.text file
+18-05-08 20:12:52 DEBUG - fileSearch: searching path: ~/Downloads/ for text
+18-05-08 20:12:52 DEBUG - askContinue: prompting to continue
+18-05-08 20:12:52 DEBUG - askContinue: teamdrive: IT Blabla
+18-05-08 20:12:52 DEBUG - askContinue: portfolio folder: /Volumes/GoogleDrive/Team Drives/IT Blabla/c/b/a/Portfolios
+18-05-08 20:12:53 INFO - askContinue: using portfolio folder: /Volumes/GoogleDrive/Team Drives/IT Blabla/c/b/a/Portfolios
+18-05-08 20:12:53 DEBUG - writeConfig: writing configuration to file: /Users/aaronciuffo/.config/fileStreamPortfolio/config.ini
+18-05-08 20:12:53 INFO - main: checking for alternative gradefolder.txt on Desktop
+18-05-08 20:12:53 INFO - main: alternative not found; continuing with ./gradefolders.txt
+18-05-08 20:12:53 INFO - main: opening grade folders file: ./gradefolders.txt
+18-05-08 20:12:53 INFO - readCSV: parsing CSV /Users/aaronciuffo/Downloads/student_export.text
+18-05-08 20:12:53 INFO - readCSV: 2 student records found
+18-05-08 20:12:53 INFO - mapHeaders: checking for expected headers
+18-05-08 20:12:53 INFO - lookup: looking up index: 0 for key: ClassOf
+18-05-08 20:12:53 INFO - lookup: looking up index: 0 for key: LastFirst
+18-05-08 20:12:53 INFO - lookup: looking up index: 0 for key: Student_Number
+18-05-08 20:12:53 INFO - lookup: looking up index: 1 for key: ClassOf
+18-05-08 20:12:53 INFO - lookup: looking up index: 1 for key: LastFirst
+18-05-08 20:12:53 INFO - lookup: looking up index: 1 for key: Student_Number
+18-05-08 20:12:53 INFO - main: attempting to create directory: /Volumes/GoogleDrive/Team Drives/IT Blabla/c/b/a/Portfolios/Class Of-3099/OneEye, Leela - 1138
+18-05-08 20:12:53 INFO - main: directory exists, skipping
+18-05-08 20:12:53 INFO - main: attempting to create directory: /Volumes/GoogleDrive/Team Drives/IT Blabla/c/b/a/Portfolios/Class Of-9990/Coyle, Jessie - 97777
+18-05-08 20:12:53 INFO - main: directory exists, skipping
+18-05-08 20:12:53 INFO - main: successfully created 0 of 2 student directories
+18-05-08 20:12:53 INFO - main: skipped: 2
+18-05-08 20:12:53 INFO - main: errors: 0
+18-05-08 20:18:37 INFO - main: ===================== Starting Log =====================
+18-05-08 20:18:37 DEBUG - checkFSMount: Searching for Google Drive File Stream Mount Points
+18-05-08 20:18:37 DEBUG - checkFSMount: Found what appears to be a valid mountpoint at: /Volumes/GoogleDrive
+18-05-08 20:18:37 DEBUG - main: getting configuration
+18-05-08 20:18:37 DEBUG - __init__: starting configuration check
+18-05-08 20:18:37 DEBUG - __init__: config path: ~/.config/fileStreamPortfolio
+18-05-08 20:18:37 DEBUG - __init__: config file: /Users/aaronciuffo/.config/fileStreamPortfolio/config.ini
+18-05-08 20:18:37 DEBUG - getConfig: getting configuration file
+18-05-08 20:18:37 INFO - main: === Current Configuration Settings ===
+18-05-08 20:18:37 INFO - main: teamdrive -- IT Blabla
+18-05-08 20:18:37 INFO - main: mountpoint -- /Volumes/GoogleDrive
+18-05-08 20:18:37 INFO - main: portfoliofolder -- /Volumes/GoogleDrive/Team Drives/IT Blabla/c/b/a/Portfolios
+18-05-08 20:18:37 INFO - main: gradefolders -- /Users/aaronciuffo/src/folderPopulate/fileStreamPortfolio.py/gradefolders.txt
+18-05-08 20:18:37 DEBUG - getDrives: Searching for Google Drive File Stream Mount Points
+18-05-08 20:18:37 DEBUG - getStudentFile: getting student_export.text file
+18-05-08 20:19:43 INFO - main: ===================== Starting Log =====================
+18-05-08 20:19:43 DEBUG - checkFSMount: Searching for Google Drive File Stream Mount Points
+18-05-08 20:19:43 DEBUG - checkFSMount: Found what appears to be a valid mountpoint at: /Volumes/GoogleDrive
+18-05-08 20:19:43 DEBUG - main: getting configuration
+18-05-08 20:19:43 DEBUG - __init__: starting configuration check
+18-05-08 20:19:43 DEBUG - __init__: config path: ~/.config/fileStreamPortfolio
+18-05-08 20:19:43 DEBUG - __init__: config file: /Users/aaronciuffo/.config/fileStreamPortfolio/config.ini
+18-05-08 20:19:43 DEBUG - getConfig: getting configuration file
+18-05-08 20:19:43 INFO - main: === Current Configuration Settings ===
+18-05-08 20:19:43 INFO - main: teamdrive -- IT Blabla
+18-05-08 20:19:43 INFO - main: mountpoint -- /Volumes/GoogleDrive
+18-05-08 20:19:43 INFO - main: portfoliofolder -- /Volumes/GoogleDrive/Team Drives/IT Blabla/c/b/a/Portfolios
+18-05-08 20:19:43 INFO - main: gradefolders -- ./gradefolders.txt
+18-05-08 20:19:43 DEBUG - getDrives: Searching for Google Drive File Stream Mount Points
+18-05-08 20:19:43 DEBUG - getStudentFile: getting student_export.text file
+18-05-08 20:20:48 INFO - main: ===================== Starting Log =====================
+18-05-08 20:20:48 DEBUG - checkFSMount: Searching for Google Drive File Stream Mount Points
+18-05-08 20:20:48 DEBUG - checkFSMount: Found what appears to be a valid mountpoint at: /Volumes/GoogleDrive
+18-05-08 20:20:48 DEBUG - main: getting configuration
+18-05-08 20:20:48 DEBUG - __init__: starting configuration check
+18-05-08 20:20:48 DEBUG - __init__: config path: ~/.config/fileStreamPortfolio
+18-05-08 20:20:48 DEBUG - __init__: config file: /Users/aaronciuffo/.config/fileStreamPortfolio/config.ini
+18-05-08 20:20:48 DEBUG - getConfig: getting configuration file
+18-05-08 20:20:48 INFO - main: === Current Configuration Settings ===
+18-05-08 20:20:48 INFO - main: teamdrive -- IT Blabla
+18-05-08 20:20:48 INFO - main: mountpoint -- /Volumes/GoogleDrive
+18-05-08 20:20:48 INFO - main: portfoliofolder -- /Volumes/GoogleDrive/Team Drives/IT Blabla/c/b/a/Portfolios
+18-05-08 20:20:48 INFO - main: gradefolders -- /Users/aaronciuffo/src/folderPopulate/fileStreamPortfolio.py//gradefolders.txt
+18-05-08 20:20:48 DEBUG - getDrives: Searching for Google Drive File Stream Mount Points
+18-05-08 20:20:48 DEBUG - getStudentFile: getting student_export.text file
+18-05-08 20:20:49 DEBUG - fileSearch: searching path: ~/Downloads/ for text
+18-05-08 20:20:50 DEBUG - askContinue: prompting to continue
+18-05-08 20:20:50 DEBUG - askContinue: teamdrive: IT Blabla
+18-05-08 20:20:50 DEBUG - askContinue: portfolio folder: /Volumes/GoogleDrive/Team Drives/IT Blabla/c/b/a/Portfolios
+18-05-08 20:20:51 INFO - askContinue: using portfolio folder: /Volumes/GoogleDrive/Team Drives/IT Blabla/c/b/a/Portfolios
+18-05-08 20:20:51 DEBUG - writeConfig: writing configuration to file: /Users/aaronciuffo/.config/fileStreamPortfolio/config.ini
+18-05-08 20:20:51 INFO - main: checking for alternative gradefolder.txt on Desktop
+18-05-08 20:20:51 INFO - main: alternative not found; continuing with /Users/aaronciuffo/src/folderPopulate/fileStreamPortfolio.py//gradefolders.txt
+18-05-08 20:20:51 CRITICAL - main: current working directory: /Users/aaronciuffo/src/folderPopulate/fileStreamPortfolio.py/
+18-05-08 20:20:51 CRITICAL - main: ~/.config/fileStreamPortfolio/config.ini is missing valid "gradefolders" option
+18-05-08 20:20:51 CRITICAL - main: gradefolders should contain, one per line, folders to be created for each student: 00-Preeschool..12-Grade
+18-05-08 20:20:51 CRITICAL - main: please create a file named "gradefolders.txt" and place it on the Desktop
+18-05-08 20:22:43 INFO - main: ===================== Starting Log =====================
+18-05-08 20:22:43 DEBUG - checkFSMount: Searching for Google Drive File Stream Mount Points
+18-05-08 20:22:43 DEBUG - checkFSMount: Found what appears to be a valid mountpoint at: /Volumes/GoogleDrive
+18-05-08 20:22:43 DEBUG - main: getting configuration
+18-05-08 20:22:43 DEBUG - __init__: starting configuration check
+18-05-08 20:22:43 DEBUG - __init__: config path: ~/.config/fileStreamPortfolio
+18-05-08 20:22:43 DEBUG - __init__: config file: /Users/aaronciuffo/.config/fileStreamPortfolio/config.ini
+18-05-08 20:22:43 DEBUG - getConfig: getting configuration file
+18-05-08 20:22:43 INFO - main: === Current Configuration Settings ===
+18-05-08 20:22:43 INFO - main: teamdrive -- IT Blabla
+18-05-08 20:22:43 INFO - main: mountpoint -- /Volumes/GoogleDrive
+18-05-08 20:22:43 INFO - main: portfoliofolder -- /Volumes/GoogleDrive/Team Drives/IT Blabla/c/b/a/Portfolios
+18-05-08 20:22:43 INFO - main: gradefolders -- .//gradefolders.txt
+18-05-08 20:22:43 DEBUG - getDrives: Searching for Google Drive File Stream Mount Points
+18-05-08 20:22:43 DEBUG - getStudentFile: getting student_export.text file
+18-05-08 20:22:44 DEBUG - fileSearch: searching path: ~/Downloads/ for text
+18-05-08 20:22:45 DEBUG - askContinue: prompting to continue
+18-05-08 20:22:45 DEBUG - askContinue: teamdrive: IT Blabla
+18-05-08 20:22:45 DEBUG - askContinue: portfolio folder: /Volumes/GoogleDrive/Team Drives/IT Blabla/c/b/a/Portfolios
+18-05-08 20:22:46 INFO - askContinue: using portfolio folder: /Volumes/GoogleDrive/Team Drives/IT Blabla/c/b/a/Portfolios
+18-05-08 20:22:46 DEBUG - writeConfig: writing configuration to file: /Users/aaronciuffo/.config/fileStreamPortfolio/config.ini
+18-05-08 20:22:46 INFO - main: checking for alternative gradefolder.txt on Desktop
+18-05-08 20:22:46 INFO - main: alternative not found; continuing with .//gradefolders.txt
+18-05-08 20:22:46 INFO - main: opening grade folders file: .//gradefolders.txt
+18-05-08 20:22:46 INFO - readCSV: parsing CSV /Users/aaronciuffo/Downloads/student_export.text
+18-05-08 20:22:46 INFO - readCSV: 2 student records found
+18-05-08 20:22:46 INFO - mapHeaders: checking for expected headers
+18-05-08 20:22:46 INFO - lookup: looking up index: 0 for key: ClassOf
+18-05-08 20:22:46 INFO - lookup: looking up index: 0 for key: LastFirst
+18-05-08 20:22:46 INFO - lookup: looking up index: 0 for key: Student_Number
+18-05-08 20:22:46 INFO - lookup: looking up index: 1 for key: ClassOf
+18-05-08 20:22:46 INFO - lookup: looking up index: 1 for key: LastFirst
+18-05-08 20:22:46 INFO - lookup: looking up index: 1 for key: Student_Number
+18-05-08 20:22:46 INFO - main: attempting to create directory: /Volumes/GoogleDrive/Team Drives/IT Blabla/c/b/a/Portfolios/Class Of-3099/OneEye, Leela - 1138
+18-05-08 20:22:46 INFO - main: directory exists, skipping
+18-05-08 20:22:46 INFO - main: attempting to create directory: /Volumes/GoogleDrive/Team Drives/IT Blabla/c/b/a/Portfolios/Class Of-9990/Coyle, Jessie - 97777
+18-05-08 20:22:46 INFO - main: directory exists, skipping
+18-05-08 20:22:46 INFO - main: successfully created 0 of 2 student directories
+18-05-08 20:22:46 INFO - main: skipped: 2
+18-05-08 20:22:46 INFO - main: errors: 0
