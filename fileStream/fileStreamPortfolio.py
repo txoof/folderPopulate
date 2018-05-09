@@ -369,7 +369,7 @@ class parseCSV(object):
     
 
 
-# In[18]:
+# In[19]:
 
 def main():
     
@@ -527,12 +527,13 @@ def main():
             print 'exiting'
             return(1)
 
+    print '\n'*20
     print 'Welcome to the portfolio creator for Google Team Drive!'
     print 'This program will create portfolio folders in Google Team Drive for students.'
     print 'You will need a student_export.text file from PowerSchool with at least the following information:'
-    print 'ClassOf, FirstLast, Student_Number\n'
+    print '     ClassOf, FirstLast, Student_Number\n'
     print 'The order of the CSV does not matter, but the headers must be on the very first line.'
-    print 'You will also need Google File Stream installed configured'
+    print 'You will also need Google File Stream installed and configured'
     print 'File Stream can be downloaded here: https://support.google.com/drive/answer/7329379?hl=en'
     raw_input("Press Enter to continue...\n\n\n")
 
