@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 
-# In[31]:
+# In[3]:
 
 import os
 import fnmatch
@@ -17,17 +17,18 @@ import csv
 
 appShortName = 'fileStreamPortfolio'
 
-# get the current working directory to use elsewhere - this is problematic in jupyter versus the terminal
+# get the current working directory
+# When launching a .comman from the OS X Finder, the working directory is typically ~/; this is problematic
+# for locating resource files
+# I don't love this hack, but it works.
 try:
     __file__
     cwd = os.path.dirname(__file__)+'/'
 except NameError as e:
     cwd = os.getcwd()
-    
-print cwd
 
 
-# In[21]:
+# In[4]:
 
 class configuration(object):
     def __init__(self, configFile = '~/.config/'+appShortName+'/config.ini'):
@@ -113,7 +114,7 @@ class configuration(object):
             exec ("self.{0} = preferences['{0}']".format(key))
 
 
-# In[22]:
+# In[5]:
 
 class teamDrives(object):
     '''
@@ -169,7 +170,7 @@ class teamDrives(object):
         
 
 
-# In[23]:
+# In[6]:
 
 def checkFSMount(mountpoint = '/Volumes/GoogleDrive'):
     logger = logging.getLogger(__name__)
@@ -199,7 +200,7 @@ def checkFSMount(mountpoint = '/Volumes/GoogleDrive'):
     
 
 
-# In[24]:
+# In[7]:
 
 def get_valid_filename(s):
     """
@@ -211,7 +212,7 @@ def get_valid_filename(s):
     return re.sub(r'(?u)[^-\w., ]', '', s)
 
 
-# In[25]:
+# In[8]:
 
 def strip_accents(s):
     s = unicode(s, "utf-8")
@@ -219,7 +220,7 @@ def strip_accents(s):
         if unicodedata.category(c) != 'Mn')
 
 
-# In[26]:
+# In[9]:
 
 def fileRead(fname):
     '''
@@ -237,7 +238,7 @@ def fileRead(fname):
         return(False)
 
 
-# In[27]:
+# In[16]:
 
 class parseCSV(object):
 
@@ -302,7 +303,8 @@ class parseCSV(object):
             self.filename = filename
             self.csvList = csvList
         else:
-            self.logger.critical('no student records found.')
+            self.logger.critical('no records found in file: {}.'.format(self.filename))
+            self.logger.critical('please check that the above file is a comma sepparated values file (CSV)')
             return(False)
         
         self.mapHeaders()
@@ -367,21 +369,12 @@ class parseCSV(object):
     
 
 
-# In[30]:
+# In[18]:
 
 def main():
-
-    #### TESTING VARIABLES #####
-    # remove these! and set cfg file with argv or something similar
-    # config file
+    
+    # default location for configuration file - this will be created if needed
     cfgfile = '~/.config/'+appShortName+'/config.ini'
-    
-    #studentFile = './student_export.text'
-    
-    
-    
-    # //end remove
-    #### TESTING VARIABLES #####
     
     # Create the Logger
     logger = logging.getLogger(__name__)
@@ -400,7 +393,7 @@ def main():
     file_handler.setFormatter(logging.Formatter(fmt = fileformat, datefmt = datefmt))
 
     # stream handler
-    streamformat = '%(asctime)s %(levelname)s - %(funcName)s: %(message)s'
+    streamformat = '%(levelname)s: %(message)s'
     stream_handler = logging.StreamHandler(sys.stderr)
     stream_handler.setLevel(logging.CRITICAL)
     stream_handler.setFormatter(logging.Formatter(fmt = streamformat, datefmt = ''))
@@ -419,7 +412,7 @@ def main():
     logger.info('===================== Starting Log =====================')
     
     def getTeamDrive():
-        '''ask for the appropriate team drive to search'''
+        '''menu interaction to ask for the appropriate team drive to search'''
         logger.debug('getting Team Drive name')
         try:
             myDrives.getDrives()
@@ -439,7 +432,7 @@ def main():
             return(myDrive)
     
     def getPortfolioFolder():
-        '''ask for appropriate portfolio folder'''
+        '''menu interaction to ask for appropriate portfolio folder in a team drive'''
         logger.debug('beggining search for portfolio folder')
         print 'Searching in Team Drive: {0}'.format(myConfig.teamdrive)
         folderSearch = raw_input('Please enter part of the portfolio folder name (case sensitive search): ')
@@ -470,6 +463,7 @@ def main():
         return(myFolder)
     
     def fileSearch(path, search = ''):
+        '''search for a file name string in a given path'''
         logger.debug('searching path: {0} for {1}'.format(path, search))
         searchPath = os.path.expanduser(path)
         mySearch = '*'+search+'*'
@@ -487,7 +481,7 @@ def main():
 
     
     def getStudentFile(items = ['Desktop', 'Downloads', 'Documents']):
-        '''ask for appropriate student_export.text file'''
+        '''menu interaction to ask for appropriate student_export.text file'''
         logger.debug('getting student_export.text file')
         foldersMenu = simpleMenu.menu(name = 'student_export file location', 
                                       items = items)
@@ -513,6 +507,7 @@ def main():
         
     
     def askContinue():
+        '''menu interaction to ask if everything is correct and run the folder population'''
         logger.debug('prompting to continue')
         logger.debug('teamdrive: {0}'.format(myConfig.teamdrive))
         logger.debug('portfolio folder: {0}'.format(myConfig.portfoliofolder))
@@ -531,6 +526,17 @@ def main():
         if response is 'Q':
             print 'exiting'
             return(1)
+
+    print 'Welcome to the portfolio creator for Google Team Drive!'
+    print 'This program will create portfolio folders in Google Team Drive for students.'
+    print 'You will need a student_export.text file from PowerSchool with at least the following information:'
+    print 'ClassOf, FirstLast, Student_Number\n'
+    print 'The order of the CSV does not matter, but the headers must be on the very first line.'
+    print 'You will also need Google File Stream installed configured'
+    print 'File Stream can be downloaded here: https://support.google.com/drive/answer/7329379?hl=en'
+    raw_input("Press Enter to continue...\n\n\n")
+
+
         
     if checkFSMount():
         pass
@@ -550,7 +556,7 @@ def main():
             print "exiting"
             return(0)
 
-    # get the configuration file
+    # get the configuration settings from the config.ini file
     logger.debug('getting configuration')
     myConfig = configuration(cfgfile)
     logger.info('=== Current Configuration Settings ===')
@@ -583,12 +589,15 @@ def main():
     # get the appropriate student file 
     studentFile = getStudentFile()
     
+    # bail out if the getting the student failed
     if studentFile == 1:
         return(0)
     
+    # bail out if user chose to quit
     if askContinue() == 1:
         return(0)
     
+    # use the default ./gradefolders.txt file; if an alternative is on the desktop use that one instead
     logger.info('checking for alternative gradefolder.txt on Desktop')
     if os.path.exists(os.path.expanduser('~/Desktop/gradefolders.txt')):
         myConfig.gradefolders = os.path.expanduser('~/Desktop/gradefolders.txt')
@@ -596,7 +605,8 @@ def main():
     else:
         logger.info('alternative not found; continuing with {0}'.format(myConfig.gradefolders))
         # check for grade folder description file
-        
+    
+    # if there is no grade folder, bail out with the error messages below
     if not os.path.exists(myConfig.gradefolders):
         logger.critical('current working directory: {}'.format(cwd))
         logger.critical('"gradefolders.txt" file is missing in folder: {}'.format(cwd))
@@ -623,6 +633,7 @@ def main():
     # empty list for storing student paths to be created
     studentPathList = []
     
+    # step through the CSV lines and build a list of directories that should be created
     for index, value in enumerate(myCSV.csvList):
         classOfString = get_valid_filename('Class Of-' + myCSV.lookup(index, 'ClassOf'))
         studentName = get_valid_filename(myCSV.lookup(index, 'LastFirst'))
@@ -634,6 +645,7 @@ def main():
     makedirsFail = []
     makedirsSkip = []
     
+    # step through the list of directories to create and creat them as needed
     for directory in studentPathList:
         logger.info('attempting to create directory: {0}'.format(directory))
         if not os.path.exists(directory):
@@ -652,13 +664,16 @@ def main():
     logger.info('skipped: {0}'.format(len(makedirsSkip)))
     logger.info('errors: {0}'.format(len(makedirsFail)))
     if len(makedirsFail)>0:
-        logger.info('failed creations:\n{0}'.format(makedirsFail))
+        logger.info('failed to create:\n{0}'.format(makedirsFail))
             
         
-    print 'Completed creating portfolio folders.'
+    print '\n\n\nCompleted creating portfolio folders.'
     print 'successfully created {0} of {1} student directories'.format(success, len(studentPathList))
-    print 'skipped (already existed): {0}'.format(len(makedirsSkip))
+    print 'skipped (these already existed): {0}'.format(len(makedirsSkip))
     print 'errors: {0}'.format(len(makedirsFail))
     
+    print '\n\n\n'
+    print '='*10
+    print 'Press CMD + Q to quit'
 main()
 
