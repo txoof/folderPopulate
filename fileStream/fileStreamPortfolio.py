@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 
-# In[3]:
+# In[21]:
 
 import os
 import fnmatch
@@ -16,7 +16,7 @@ import unicodedata
 import csv
 
 appShortName = 'fileStreamPortfolio'
-
+version = '18.05.09-2104'
 # get the current working directory
 # When launching a .comman from the OS X Finder, the working directory is typically ~/; this is problematic
 # for locating resource files
@@ -139,6 +139,7 @@ class teamDrives(object):
             raise os.error('Error in os.walk for mount point: {0}'.format(self.mountpoint))
         for drive in drives:
             self.drives[drive] = oct(os.stat(self.mountpoint+drive).st_mode & 0o777)
+        self.logger.debug('available Team Drive Mounts:\n{0}'.format(self.drives))
     
     def listrwDrives(self):
         rwDrives = []
@@ -181,7 +182,7 @@ def checkFSMount(mountpoint = '/Volumes/GoogleDrive'):
     mountLines = mount.split('\n')
     mountPoints = []
     
-    # makek a list of all the partitions
+    # makek a list of all the mount points
     for line in mountLines:
         try:
             # re extract anything that looks like a mount point
@@ -238,7 +239,7 @@ def fileRead(fname):
         return(False)
 
 
-# In[16]:
+# In[10]:
 
 class parseCSV(object):
 
@@ -340,11 +341,15 @@ class parseCSV(object):
                 self.logger.critical('{:>5}'.format(each))
                 self.headersOK = False
         else:
+            self.logger.info('headers are OK')
             self.headersOK = True
 
         # map headers to their index
+        self.logger.info('Mapping headers')
         for index, value in enumerate(csvHeader):
             self.headerMap[value]=index
+        
+        self.logger.debug('headermap:\n{0}'.format(self.headerMap))
             
     def lookup(self, index = 0, key = 0):
         '''
@@ -353,7 +358,7 @@ class parseCSV(object):
             index (integer): list index to return (defautlts to 0)
             key (string): key to lookup in headerMap 
         '''
-        self.logger.info('looking up index: {0} for key: {1}'.format(index, key))
+        #self.logger.debug('looking up index: {0} for key: {1}'.format(index, key))
         if not key in self.headerMap:
             self.logger.warn('key: {0} not in headerMap'.format(key))
             return('')
@@ -369,47 +374,9 @@ class parseCSV(object):
     
 
 
-# In[19]:
+# In[20]:
 
 def main():
-    
-    # default location for configuration file - this will be created if needed
-    cfgfile = '~/.config/'+appShortName+'/config.ini'
-    
-    # Create the Logger
-    logger = logging.getLogger(__name__)
-
-    for each in range (0, len(logger.handlers)):
-        logger.removeHandler(logger.handlers[0])
-
-    datefmt = '%y-%m-%d %H:%M:%S'
-
-    logger.setLevel(logging.INFO)
-
-    # file handler
-    fileformat = '%(asctime)s %(levelname)s %(module)s - %(funcName)s: %(message)s'
-    file_handler = logging.FileHandler(appShortName+'.log')
-    file_handler.setLevel(logging.DEBUG)
-    file_handler.setFormatter(logging.Formatter(fmt = fileformat, datefmt = datefmt))
-
-    # stream handler
-    streamformat = '%(levelname)s: %(message)s'
-    stream_handler = logging.StreamHandler(sys.stderr)
-    stream_handler.setLevel(logging.CRITICAL)
-    stream_handler.setFormatter(logging.Formatter(fmt = streamformat, datefmt = ''))
-
-    # rotation handler
-    fileformat = '%(asctime)s %(levelname)s - %(funcName)s: %(message)s'
-    rotation_handler = RotatingFileHandler(appShortName+'.log', maxBytes = 500000, backupCount = 5)
-    rotation_handler.setLevel(logging.DEBUG)
-    rotation_handler.setFormatter(logging.Formatter(fmt = fileformat, datefmt = datefmt))
-
-
-    # add handler to logger
-    #logger.addHandler(file_handler)
-    logger.addHandler(stream_handler)
-    logger.addHandler(rotation_handler)
-    logger.info('===================== Starting Log =====================')
     
     def getTeamDrive():
         '''menu interaction to ask for the appropriate team drive to search'''
@@ -464,7 +431,7 @@ def main():
     
     def fileSearch(path, search = ''):
         '''search for a file name string in a given path'''
-        logger.debug('searching path: {0} for {1}'.format(path, search))
+        logger.debug('searching path: {0} for \"{1}\"'.format(path, search))
         searchPath = os.path.expanduser(path)
         mySearch = '*'+search+'*'
         result = []
@@ -480,7 +447,7 @@ def main():
         return([m.group(0) for l in allFiles for m in [regex.search(l)] if m])
 
     
-    def getStudentFile(items = ['Desktop', 'Downloads', 'Documents']):
+    def getStudentFile(items = ['Desktop', 'Downloads', 'Documents', 'stuffnthings']):
         '''menu interaction to ask for appropriate student_export.text file'''
         logger.debug('getting student_export.text file')
         foldersMenu = simpleMenu.menu(name = 'student_export file location', 
@@ -494,9 +461,14 @@ def main():
         
         searchPath = '~/'+myFolder+'/'
         fileList = fileSearch(searchPath, 'text')
-        if not fileList:
-            print 'That folder does not appear to exist. Try again.'
+        logger.debug('fileList: {0}'.format(fileList))
+        if fileList is False:
+            print 'That folder does not exist. Please choose a different folder.'
             getStudentFile()
+        else:
+            if len(fileList)<1:
+                print 'That folder does not contain any files that end with /".text/". Please try again.'
+                getStudentFile()
         
         fileMenu =simpleMenu.menu(name = 'student export files', items = fileList)
         foldersMenu.sortMenu()
@@ -526,9 +498,50 @@ def main():
         if response is 'Q':
             print 'exiting'
             return(1)
+    
+    # default location for configuration file - this will be created if needed
+    cfgfile = '~/.config/'+appShortName+'/config.ini'
+    
+    # Create the Logger
+    logger = logging.getLogger(__name__)
+
+    for each in range (0, len(logger.handlers)):
+        logger.removeHandler(logger.handlers[0])
+
+    datefmt = '%y-%m-%d %H:%M:%S'
+
+    logger.setLevel(logging.INFO)
+
+    # file handler
+    fileformat = '%(asctime)s %(levelname)s %(module)s - %(funcName)s: %(message)s'
+    file_handler = logging.FileHandler(appShortName+'.log')
+    file_handler.setLevel(logging.DEBUG)
+    file_handler.setFormatter(logging.Formatter(fmt = fileformat, datefmt = datefmt))
+
+    # stream handler
+    streamformat = '%(levelname)s: %(message)s'
+    stream_handler = logging.StreamHandler(sys.stderr)
+    stream_handler.setLevel(logging.CRITICAL)
+    stream_handler.setFormatter(logging.Formatter(fmt = streamformat, datefmt = ''))
+
+    # rotation handler
+    fileformat = '%(asctime)s %(levelname)s - %(funcName)s: %(message)s'
+    rotation_handler = RotatingFileHandler(appShortName+'.log', maxBytes = 500000, backupCount = 5)
+    rotation_handler.setLevel(logging.DEBUG)
+    rotation_handler.setFormatter(logging.Formatter(fmt = fileformat, datefmt = datefmt))
+
+
+    # add handler to logger
+    #logger.addHandler(file_handler)
+    logger.addHandler(stream_handler)
+    logger.addHandler(rotation_handler)
+    logger.info('===================== Starting Log =====================')
+    logger.info('version: {0}'.format(version))
+    
+
 
     print '\n'*20
-    print 'Welcome to the portfolio creator for Google Team Drive!'
+    print 'Welcome to the portfolio creator for Google Team Drive version {0}'.format(version)
     print 'This program will create portfolio folders in Google Team Drive for students.'
     print 'You will need a student_export.text file from PowerSchool with at least the following information:'
     print '     ClassOf, FirstLast, Student_Number\n'
@@ -640,10 +653,10 @@ def main():
         studentName = get_valid_filename(myCSV.lookup(index, 'LastFirst'))
         studentNumber = get_valid_filename(myCSV.lookup(index, 'Student_Number'))
         studentPathList.append('{0}/{1}/{2} - {3}'.format(myConfig.portfoliofolder, classOfString, studentName, studentNumber))
-        
-
+    
     # record failed, skipped creations
     makedirsFail = []
+    makefoldersFail = []
     makedirsSkip = []
     
     # step through the list of directories to create and creat them as needed
@@ -659,13 +672,29 @@ def main():
         else:
             logger.info('directory exists, skipping')
             makedirsSkip.append(directory)
+        
+        for folder in gradeFoldersList:
+            logger.info('attemting to create gradlevel folder: {0}'.format(directory + '/' + folder))
+            if not os.path.exists(directory + '/' + folder):
+                logger.info('creating folder')
+                try: 
+                    os.makedirs(directory + '/' + folder)
+                except OSError as e:
+                    logger.warn('Error creating folder: {0}'.format(e))
+                    makefoldersFail.append(directory + '/' + folder)
+                
     
     success = len(studentPathList) - len(makedirsFail) - len(makedirsSkip)
     logger.info('successfully created {0} of {1} student directories'.format(success, len(studentPathList)))
     logger.info('skipped: {0}'.format(len(makedirsSkip)))
-    logger.info('errors: {0}'.format(len(makedirsFail)))
+    logger.info('student errors: {0}'.format(len(makedirsFail)))
+    logger.info('folder errors: {0}'.format(len(makefoldersFail)))
+    
     if len(makedirsFail)>0:
-        logger.info('failed to create:\n{0}'.format(makedirsFail))
+        logger.info('failed to create student folders:\n{0}'.format(makedirsFail))
+    
+    if len(makefoldersFail)>0:
+        logger.info('failed to create gradelevel folders: \n{0}'.format(makefoldersFail))
             
         
     print '\n\n\nCompleted creating portfolio folders.'
@@ -673,8 +702,14 @@ def main():
     print 'skipped (these already existed): {0}'.format(len(makedirsSkip))
     print 'errors: {0}'.format(len(makedirsFail))
     
-    print '\n\n\n'
-    print '='*10
-    print 'Press CMD + Q to quit'
+
 main()
+print '\n\n\n'
+print '='*10
+print 'Press CMD + Q to quit'
+
+
+# In[ ]:
+
+
 
