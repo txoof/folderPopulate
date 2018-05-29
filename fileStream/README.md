@@ -3,8 +3,11 @@
 Works only on OS X
 fileStreamPopulate uses a FUSE mounted Team Drive via Google FileStream on OS X to create portfolio folders for students. 
 A folder for each student is created in the hiarchy shown below. The folders are created based on a CSV that contains
+#### CSV Format
+ClassOf,Grade_Level,LastFirst,Student_Number
 
-##### Folder Hiarchy
+
+#### Folder Hiarchy
 Class Of-XXXX______ (XXXX - Projected graduation year)
                   |
                   LastName, FirstName - YYYYYY______ (YYYYYY - Student number)
