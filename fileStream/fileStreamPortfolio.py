@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 
-# In[42]:
+# In[4]:
 
 
 import os
@@ -15,6 +15,7 @@ from logging.handlers import RotatingFileHandler
 import sys
 import unicodedata
 import csv
+import time
 
 appShortName = 'fileStreamPortfolio'
 version = '18.05.09-2104'
@@ -29,7 +30,7 @@ except NameError as e:
     cwd = os.getcwd()
 
 
-# In[32]:
+# In[5]:
 
 
 class configuration(object):
@@ -116,7 +117,7 @@ class configuration(object):
             exec ("self.{0} = preferences['{0}']".format(key))
 
 
-# In[33]:
+# In[6]:
 
 
 class teamDrives(object):
@@ -174,7 +175,7 @@ class teamDrives(object):
         
 
 
-# In[34]:
+# In[7]:
 
 
 def checkFSMount(mountpoint = '/Volumes/GoogleDrive'):
@@ -205,7 +206,7 @@ def checkFSMount(mountpoint = '/Volumes/GoogleDrive'):
     
 
 
-# In[35]:
+# In[8]:
 
 
 def get_valid_filename(s):
@@ -218,7 +219,7 @@ def get_valid_filename(s):
     return re.sub(r'(?u)[^-\w., ]', '', s)
 
 
-# In[36]:
+# In[9]:
 
 
 def strip_accents(s):
@@ -227,7 +228,7 @@ def strip_accents(s):
         if unicodedata.category(c) != 'Mn')
 
 
-# In[37]:
+# In[10]:
 
 
 def fileRead(fname):
@@ -246,7 +247,7 @@ def fileRead(fname):
         return(False)
 
 
-# In[38]:
+# In[11]:
 
 
 class parseCSV(object):
@@ -382,7 +383,7 @@ class parseCSV(object):
     
 
 
-# In[39]:
+# In[13]:
 
 
 def main():
@@ -566,7 +567,13 @@ def main():
     else:
         logger.info('Attempting to start Google Drive File Stream')
         try:
+            # attempt to launch google file stream application
             gDriveFS = subprocess.check_call(["open", "-a", "Google Drive File Stream"])
+            # wait 15 seconds to see if it launches
+            print('Starting File Stream - this may take several seconds')
+            logger.info('sleeping for 10 seconds while waiting for File Stream to start')
+            time.sleep(10)
+            
         except subprocess.CalledProcessError as err:
             logger.warn('OS Error: {0}'.format(err))
             logger.critical('Google Drive File Stream does not appear to be installed. Please download from the link below')            
