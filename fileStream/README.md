@@ -1,13 +1,18 @@
 # fileStreamFolderPopulate
 
-Works only on OS X
+Works only on OS X with a Google Team Drive mounted using the TD FUSE Application
 fileStreamPopulate uses a FUSE mounted Team Drive via Google FileStream on OS X to create portfolio folders for students. 
-A folder for each student is created in the hiarchy shown below. The folders are created based on a CSV that contains
-#### CSV Format
-ClassOf,Grade_Level,LastFirst,Student_Number
+A folder for each student is created in the hiarchy shown below. The folders are created based on a CSV that contains student projected graduation year; LastName, FirstName; Student Number.
 
+#### CSV Format
+```
+ClassOf,LastFirst,Student_Number
+"2005","Dean, James","123456"
+"2006","Washington, George","654321
+```
 
 #### Folder Hiarchy
+```
 Class Of-XXXX______ (XXXX - Projected graduation year)
                   |
                   LastName, FirstName - YYYYYY______ (YYYYYY - Student number)
@@ -19,88 +24,39 @@ Class Of-XXXX______ (XXXX - Projected graduation year)
                                                     02-Grade
                                                     ...
                                                     12-Grade
+```
                                                     
 
-## Getting Started
+## Prerequisites
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+Google FileStream: https://dl.google.com/drive-file-stream/GoogleDriveFileStream.dmg
+Python 2.7 (installed by default on OS X)
 
-### Prerequisites
+## Installing
 
-What things you need to install the software and how to install them
+### Configure Google Filestream
+* Download and Install Google FileStream application - An administrator password is required 
+* Locate the Team Drive where student portfolios will be kept
+* If it does not exist, create a folder on the Team Drive that will contain student Portfolios
+* Open Google FileStream and sign in with a user that can acess the Team Drive specified above
 
-```
-Give examples
-```
+### Setup fileStreamPortfolio_App
+* Download fileStreamPortfolio https://github.com/txoof/folderPopulate/blob/master/fileStream/fileStream.tgz
+* Double Click fileStream.tgz to unzip
+* Move fileStreamPortfolio_App folder to Documents or Application folder
 
-### Installing
+### Test & Demo
+* Open the fileStreamPortfolio_App folder and copy ```student_export_demo.text``` to the Downloads folder
+* Double click on fileStreamPortfolio.command to launch the program
+* Follow the prompts to run the demo
+* **The program is menu driven and asks the user to use numeric or text choices to answer questions for the configuration and opperation
 
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+## Opperation
+Run fileStreamPortfolio_App any time new students need to be added to the portfolio folder. The program will **not** create duplicate folders. It is OK to use a student_export.text file that contains duplicate entries. The first time the program is run it will help the user locate the appropriate folder on a Team Drive and a student_export.text file. 
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+* **Aaron Ciuffo (aaron.ciuffo@gmail.com)** - *Initial work* - [Txoof](https://github.com/txoof)
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
