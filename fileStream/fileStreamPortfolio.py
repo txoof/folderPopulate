@@ -1,7 +1,8 @@
 #!/usr/bin/python
 
 
-# In[21]:
+# In[42]:
+
 
 import os
 import fnmatch
@@ -28,7 +29,8 @@ except NameError as e:
     cwd = os.getcwd()
 
 
-# In[4]:
+# In[32]:
+
 
 class configuration(object):
     def __init__(self, configFile = '~/.config/'+appShortName+'/config.ini'):
@@ -114,7 +116,8 @@ class configuration(object):
             exec ("self.{0} = preferences['{0}']".format(key))
 
 
-# In[5]:
+# In[33]:
+
 
 class teamDrives(object):
     '''
@@ -171,7 +174,8 @@ class teamDrives(object):
         
 
 
-# In[6]:
+# In[34]:
+
 
 def checkFSMount(mountpoint = '/Volumes/GoogleDrive'):
     logger = logging.getLogger(__name__)
@@ -201,7 +205,8 @@ def checkFSMount(mountpoint = '/Volumes/GoogleDrive'):
     
 
 
-# In[7]:
+# In[35]:
+
 
 def get_valid_filename(s):
     """
@@ -213,7 +218,8 @@ def get_valid_filename(s):
     return re.sub(r'(?u)[^-\w., ]', '', s)
 
 
-# In[8]:
+# In[36]:
+
 
 def strip_accents(s):
     s = unicode(s, "utf-8")
@@ -221,7 +227,8 @@ def strip_accents(s):
         if unicodedata.category(c) != 'Mn')
 
 
-# In[9]:
+# In[37]:
+
 
 def fileRead(fname):
     '''
@@ -239,7 +246,8 @@ def fileRead(fname):
         return(False)
 
 
-# In[10]:
+# In[38]:
+
 
 class parseCSV(object):
 
@@ -374,7 +382,8 @@ class parseCSV(object):
     
 
 
-# In[20]:
+# In[39]:
+
 
 def main():
     
@@ -447,7 +456,7 @@ def main():
         return([m.group(0) for l in allFiles for m in [regex.search(l)] if m])
 
     
-    def getStudentFile(items = ['Desktop', 'Downloads', 'Documents', 'stuffnthings']):
+    def getStudentFile(items = ['Desktop', 'Downloads', 'Documents']):
         '''menu interaction to ask for appropriate student_export.text file'''
         logger.debug('getting student_export.text file')
         foldersMenu = simpleMenu.menu(name = 'student_export file location', 
@@ -707,9 +716,4 @@ main()
 print '\n\n\n'
 print '='*10
 print 'Press CMD + Q to quit'
-
-
-# In[ ]:
-
-
 
