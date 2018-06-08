@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 
-# In[4]:
+# In[2]:
 
 
 import os
@@ -30,7 +30,7 @@ except NameError as e:
     cwd = os.getcwd()
 
 
-# In[5]:
+# In[3]:
 
 
 class configuration(object):
@@ -117,7 +117,7 @@ class configuration(object):
             exec ("self.{0} = preferences['{0}']".format(key))
 
 
-# In[6]:
+# In[4]:
 
 
 class teamDrives(object):
@@ -175,7 +175,7 @@ class teamDrives(object):
         
 
 
-# In[7]:
+# In[5]:
 
 
 def checkFSMount(mountpoint = '/Volumes/GoogleDrive'):
@@ -206,7 +206,7 @@ def checkFSMount(mountpoint = '/Volumes/GoogleDrive'):
     
 
 
-# In[8]:
+# In[6]:
 
 
 def get_valid_filename(s):
@@ -219,7 +219,7 @@ def get_valid_filename(s):
     return re.sub(r'(?u)[^-\w., ]', '', s)
 
 
-# In[9]:
+# In[7]:
 
 
 def strip_accents(s):
@@ -228,7 +228,7 @@ def strip_accents(s):
         if unicodedata.category(c) != 'Mn')
 
 
-# In[10]:
+# In[8]:
 
 
 def fileRead(fname):
@@ -247,7 +247,7 @@ def fileRead(fname):
         return(False)
 
 
-# In[11]:
+# In[9]:
 
 
 class parseCSV(object):
@@ -383,7 +383,7 @@ class parseCSV(object):
     
 
 
-# In[13]:
+# In[50]:
 
 
 def main():
@@ -395,18 +395,19 @@ def main():
             myDrives.getDrives()
         except Exception as e:
             logger.critical(e)
-            return(0)
+            return('Q')
         if len(myDrives.listrwDrives()) < 1:
             logger.critical('No Team Drives with write permissions available; exiting')
-            return(0)
+            return('Q')
         else:
             rwDrivesMenu = simpleMenu.menu(name = 'Team Drives', items = myDrives.listrwDrives())        
             myDrive = rwDrivesMenu.loopChoice(optional = True, message = 'Which Team Drive contains the portfolio folder?')
  
             if myDrive is 'Q':
                 print 'exiting'
-                return(1)
-            return(myDrive)
+                return('Q')
+            else:
+                return(myDrive)
     
     def getPortfolioFolder():
         '''menu interaction to ask for appropriate portfolio folder in a team drive'''
@@ -420,10 +421,10 @@ def main():
             print 'No folders matching \"{0}\" found'.format(folderSearch)
             retry = retryMenu.loopChoice(optional = False, message = 'Would you like to try your search again?')
             if retry is 'Yes':
-                getPortfolioFolder()
+                return(False)
             if retry is 'No' or 'Quit':
                 print 'exiting'
-                return(1)
+                return('Q')
         
         # ask user to choose folder from list, quit or try again
         foldersMenu = simpleMenu.menu(name = 'Matching Folders', items = myDrives.find(
@@ -431,10 +432,10 @@ def main():
         myFolder = foldersMenu.loopChoice(optional = True, optchoices = {'Q': 'Quit', 'T': 'Try search with different folder name'},
                                         message = 'Which folder contains portfolios?')
         if myFolder is 'T':
-            getPortfolioFolder()
+            return(False)
         if myFolder is 'Q':
             print 'exiting'
-            return(1)
+            return('Q')
                                                                          
         
         return(myFolder)
@@ -455,59 +456,67 @@ def main():
         #http://www.cademuir.eu/blog/2011/10/20/python-searching-for-a-string-within-a-list-list-comprehension/
         regex = re.compile('.*('+search+').*')
         return([m.group(0) for l in allFiles for m in [regex.search(l)] if m])
-
     
     def getStudentFile(items = ['Desktop', 'Downloads', 'Documents']):
-        '''menu interaction to ask for appropriate student_export.text file'''
-        logger.debug('getting student_export.text file')
-        foldersMenu = simpleMenu.menu(name = 'student_export file location', 
-                                      items = items)
+        '''menu interaction to choose appropriate student_export.text file'''
+        logger.debug('querying for student_export.text file')
+        foldersMenu = simpleMenu.menu(name = 'student_export file location', items = items)
         foldersMenu.sortMenu()
-        myFolder = foldersMenu.loopChoice(optional = True, message = 'Please specify the location of the student_export.text file')
-        
+        myFolder = foldersMenu.loopChoice(optional = True, message = 'Please specify the location of a PowerSchool "student_export" file')
         if myFolder is 'Q':
             print 'exiting'
-            return(1)
-        
+            return(myFolder)
+            
         searchPath = '~/'+myFolder+'/'
         fileList = fileSearch(searchPath, 'text')
-        logger.debug('fileList: {0}'.format(fileList))
+        logger.debug('files found in filelist: {0}'.format(fileList))
         if fileList is False:
-            print 'That folder does not exist. Please choose a different folder.'
-            getStudentFile()
+            print '{0} folder does not exist'
+            return(False)
         else:
             if len(fileList)<1:
-                print 'That folder does not contain any files that end with /".text/". Please try again.'
-                getStudentFile()
-        
-        fileMenu =simpleMenu.menu(name = 'student export files', items = fileList)
+                print '{0} folder does not contain any files that end with ".text"'.format(searchPath)
+                return(False)
+                
+        fileMenu = simpleMenu.menu(name = 'student_export files', items = fileList)
         foldersMenu.sortMenu()
         
         myFile = fileMenu.loopChoice(optional = True, message = 'Please choose the student_export text file to use')
         
-        return(searchPath+myFile)
+        if myFile is 'Q':
+            print ('exiting')
+            return('Q')
         
+        return(myFile)
     
     def askContinue():
         '''menu interaction to ask if everything is correct and run the folder population'''
         logger.debug('prompting to continue')
-        logger.debug('teamdrive: {0}'.format(myConfig.teamdrive))
+        logger.debug('current teamdrive: {0}'.format(myConfig.teamdrive))
         logger.debug('portfolio folder: {0}'.format(myConfig.portfoliofolder))
         continueMenu = simpleMenu.menu(name = 'Continue?', items = ['Yes', 'No: Set new team drive and folder'])
-        response = continueMenu.loopChoice(optional = True, message = 'Continue with the portfolio folder: {0}'
-                            .format(myConfig.portfoliofolder))
+        response = continueMenu.loopChoice(optional = True, message = 'Continue with the portfolio folder: {0}'.format(myConfig.portfoliofolder))
         if response is 'Yes':
-            logger.info('using portfolio folder: {0}'.format(myConfig.portfoliofolder))
-            myConfig.writeConfig()
-            return(0)
+            return(True)
         if response is 'No: Set new team drive and folder':
-            #need to do something about this; make some defs for get teamdrive and portofolio folder 
-            myConfig.teamdrive = getTeamDrive()
-            myConfig.portfoliofolder = getPortfolioFolder()
-            askContinue()
+            #myConfig.teamdrive = getTeamDrive()
+            myTeamDrive = False
+            myPortfolioFolder = False
+            while not myTeamDrive:
+                myTeamDrive = getTeamDrive()
+                if myTeamDrive is 'Q':
+                    return('Q')
+            while not myPortfolioFolder:
+                myPortfolioFolder = getPortfolioFolder()
+            
+            myConfig.portfoliofolder = myPortfolioFolder
+            myConfig.teamdrive = myTeamDrive
+            return(True)
+        
         if response is 'Q':
             print 'exiting'
-            return(1)
+            return('Q')
+    
     
     # default location for configuration file - this will be created if needed
     cfgfile = '~/.config/'+appShortName+'/config.ini'
@@ -521,10 +530,12 @@ def main():
     datefmt = '%y-%m-%d %H:%M:%S'
 
     logger.setLevel(logging.INFO)
+    
+    logFile = appShortName+'.log'
 
     # file handler
     fileformat = '%(asctime)s %(levelname)s %(module)s - %(funcName)s: %(message)s'
-    file_handler = logging.FileHandler(appShortName+'.log')
+    file_handler = logging.FileHandler(logFile)
     file_handler.setLevel(logging.DEBUG)
     file_handler.setFormatter(logging.Formatter(fmt = fileformat, datefmt = datefmt))
 
@@ -606,26 +617,37 @@ def main():
         # if teamdrive is not in the configuration file, get it
         logger.info('no teamdrive set in configuration file')
         myConfig.teamdrive = getTeamDrive()
-        if myConfig.teamdrive == 1:
+        if myConfig.teamdrive is Q:
             return(0)
     
     if not myConfig.portfoliofolder:
         # if portfolio folder is not in the configuration file, ask for it
         logger.info('no portfolio folder set in configuration file')
         myConfig.portfoliofolder = getPortfolioFolder()
-        if myConfig.portfoliofolder == 1:
+        if myConfig.portfoliofolder is 'Q':
             return(0)
     
     # get the appropriate student file 
-    studentFile = getStudentFile()
+    studentFile = False
+    while not studentFile:
+        logger.debug('getting student_export file path')
+        studentFile = getStudentFile()
+        if studentFile is 'Q':
+            return(0)
+            
+    logger.debug('studentFile set to: {0}'.format(studentFile))
     
-    # bail out if the getting the student failed
-    if studentFile == 1:
-        return(0)
+    # bail out if the user quit
+            
     
     # bail out if user chose to quit
-    if askContinue() == 1:
-        return(0)
+    myAskContinue = False
+    while not myAskContinue:
+        myAskContinue = askContinue()
+        if myAskContinue is 'Q':
+            return(0)
+     
+    print 'Starting folder creation...'
     
     # use the default ./gradefolders.txt file; if an alternative is on the desktop use that one instead
     logger.info('checking for alternative gradefolder.txt on Desktop')
@@ -717,6 +739,7 @@ def main():
     print 'successfully created {0} of {1} student directories'.format(success, len(studentPathList))
     print 'skipped (these already existed): {0}'.format(len(makedirsSkip))
     print 'errors: {0}'.format(len(makedirsFail))
+    print 'for debugging info see log file: {0}'.format(logFile)
     
 
 main()
