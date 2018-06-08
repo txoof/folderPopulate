@@ -1,8 +1,3 @@
-
-# coding: utf-8
-
-# In[158]:
-
 import re
 
 

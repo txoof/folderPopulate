@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 
-# In[2]:
+# In[51]:
 
 
 import os
@@ -18,7 +18,7 @@ import csv
 import time
 
 appShortName = 'fileStreamPortfolio'
-version = '18.05.09-2104'
+version = '18.06.08-1511'
 # get the current working directory
 # When launching a .comman from the OS X Finder, the working directory is typically ~/; this is problematic
 # for locating resource files
@@ -30,7 +30,7 @@ except NameError as e:
     cwd = os.getcwd()
 
 
-# In[3]:
+# In[52]:
 
 
 class configuration(object):
@@ -117,7 +117,7 @@ class configuration(object):
             exec ("self.{0} = preferences['{0}']".format(key))
 
 
-# In[4]:
+# In[53]:
 
 
 class teamDrives(object):
@@ -175,7 +175,7 @@ class teamDrives(object):
         
 
 
-# In[5]:
+# In[54]:
 
 
 def checkFSMount(mountpoint = '/Volumes/GoogleDrive'):
@@ -206,7 +206,7 @@ def checkFSMount(mountpoint = '/Volumes/GoogleDrive'):
     
 
 
-# In[6]:
+# In[55]:
 
 
 def get_valid_filename(s):
@@ -219,7 +219,7 @@ def get_valid_filename(s):
     return re.sub(r'(?u)[^-\w., ]', '', s)
 
 
-# In[7]:
+# In[56]:
 
 
 def strip_accents(s):
@@ -228,7 +228,7 @@ def strip_accents(s):
         if unicodedata.category(c) != 'Mn')
 
 
-# In[8]:
+# In[57]:
 
 
 def fileRead(fname):
@@ -247,7 +247,7 @@ def fileRead(fname):
         return(False)
 
 
-# In[9]:
+# In[58]:
 
 
 class parseCSV(object):
@@ -383,7 +383,7 @@ class parseCSV(object):
     
 
 
-# In[50]:
+# In[60]:
 
 
 def main():
@@ -487,7 +487,7 @@ def main():
             print ('exiting')
             return('Q')
         
-        return(myFile)
+        return(searchPath+myFile)
     
     def askContinue():
         '''menu interaction to ask if everything is correct and run the folder population'''
@@ -712,7 +712,7 @@ def main():
             makedirsSkip.append(directory)
         
         for folder in gradeFoldersList:
-            logger.info('attemting to create gradlevel folder: {0}'.format(directory + '/' + folder))
+            logger.info('attempting to create gradlevel folder: {0}'.format(directory + '/' + folder))
             if not os.path.exists(directory + '/' + folder):
                 logger.info('creating folder')
                 try: 
